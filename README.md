@@ -4,7 +4,7 @@ trading card games such as Pokemon, Yu-Gi-Oh, or Magic the Gathering. With a web
 only trading and selling Digimon cards. Also, with the addition of users being able to talk to one another 
 through thread posts about the latest Digimon cards or the trading card game in general. It will hopefully 
 boost the popularity of the Digimon trading card game and prevent it from losing popularity and disappearing 
-from the trading card game.
+from the trading card game industry.
 
 **Project Technologies/Techniques**
 - Database
