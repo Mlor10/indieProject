@@ -16,6 +16,9 @@ from the trading card game industry.
 - IDE: IntelliJ IDEA
 
 **Design**
+* [User Stories](DesignDocuments/UserStories.md)
+* [Project Plan](DesignDocuments/ProjectPlan.md)
+* [Screen Design](DesignDocuments/Screens.md)
 
 **Project Plan**
 
