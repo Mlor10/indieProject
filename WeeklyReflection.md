@@ -21,3 +21,7 @@ Got a couple of ideas, but going to think about them before choosing and startin
 Came up with a project topic and how it would operate and work. A Digimon trading card website.  
 
 **Week 3**  
+2/04/22
+- [x] Update pom.xml file with new log4j properties and added log4j2.properties file
+<!-- end of the list -->
+Updated and added some files and have thought of an idea for user stories and screen design. Got ideas for project plan, but have to spread them out correctly over the 16 weeks.
