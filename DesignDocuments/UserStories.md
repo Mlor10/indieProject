@@ -30,6 +30,12 @@ As a registered user, I want to be able to sign out of my account, so my account
 ### Add in new store listing
 As a registered user, I want to be able to add in new card listings, so I can trade or sell my cards.
 
+### Add in user reviews
+As a registered user, I want to be able to add a review to other users, so others can see their card trading services.
+
+### Browse users' reviews
+As any user, I want to be able to see the user's reviews based on their card trading.
+
 ### Upload image for store listing
 As a registered user, I want to be able to upload an image of my card, so I can prove that I have the card and to show its current state.
 
