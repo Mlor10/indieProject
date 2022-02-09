@@ -26,3 +26,9 @@ Came up with a project topic and how it would operate and work. A Digimon tradin
 - [x] Add log4j2.properties file
 <!-- end of the list -->
 Updated and added some files and have thought of an idea for user stories and screen design. Got ideas for project plan, but have to spread them out correctly over the 16 weeks.
+
+**Week 4**  
+2/09/22
+- [x] Design Documents
+<!-- end of the list -->
+Completed user stories, project plan, and screen design. These design documents helped out a lot in determining in what to start with first.
