@@ -25,12 +25,12 @@ As a registered user, I want to be able to upload an image for my profile pictur
 As a registered user, I want to be able to change my account info, so I can customize my account's description or profile picture.
 
 ### Sign in with an account
-As a registered user, I want to be able to sign in with my account, so I can view my card listings or threads.
+As a registered user, I want to be able to sign in with my account, so I can view my card listings or threads. ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
 
 ### Sign out of an account
-As a registered user, I want to be able to sign out of my account, so my account won't stay signed in.
+As a registered user, I want to be able to sign out of my account, so my account won't stay signed in. ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
 
-### Add in new store listing
+### Add in new card listing
 As a registered user, I want to be able to add in new card listings, so I can trade or sell my cards. ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
 
 ### Add in user reviews
