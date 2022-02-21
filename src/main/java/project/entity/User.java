@@ -3,7 +3,7 @@ package project.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * A class to represent a user
@@ -22,7 +22,7 @@ public class User {
     @GenericGenerator(name = "native",strategy = "native")
     private int id;
     @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
+    private Date dateOfBirth;
 
     /**
      * Instantiates a new user
@@ -107,7 +107,7 @@ public class User {
      *
      * @return date of birth
      */
-    public LocalDate getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -116,7 +116,7 @@ public class User {
      *
      * @param dateOfBirth user date of birth
      */
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 }
