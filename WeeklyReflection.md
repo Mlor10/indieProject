@@ -32,3 +32,16 @@ Updated and added some files and have thought of an idea for user stories and sc
 - [x] Design Documents
 <!-- end of the list -->
 Completed user stories, project plan, and screen design. These design documents helped out a lot in determining in what to start with first.
+
+**Week 5**
+2/21/22
+- [x] Weekly reflection
+- [x] Template/Design CSS
+- [x] User controller
+- [x] User entity
+- [x] User dao
+- [x] User dao crud
+- [x] Create user database
+- [x] Unit test user dao
+<!-- end of the list -->
+Completed user database and the java classes that go along with it. Also, started on templates and the website design such as the navigation bar.
