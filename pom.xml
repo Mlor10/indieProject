@@ -93,7 +93,6 @@
       <artifactId>hibernate-c3p0</artifactId>
       <version>${hibernate-version}</version>
     </dependency>
-
   </dependencies>
   <build>
     <finalName>YourIndieProject</finalName>
