@@ -1,8 +1,14 @@
 <%@include file="template/head.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html><body>
-
-<div class="container-fluid">
+<html>
+<body>
+<div class="container">
+    <div class="row">
+        <c:import url="template/header.jsp" />
+    </div>
+    <div class="row">
+        <c:import url="template/navigation.jsp" />
+    </div>
     <h2>Search Results: </h2>
     <c:if test="${users != null}">
         <table class="table table-dark table-hover">
