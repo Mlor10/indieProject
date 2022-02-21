@@ -35,7 +35,6 @@ Completed user stories, project plan, and screen design. These design documents 
 
 **Week 5**
 2/21/22
-- [x] Weekly reflection
 - [x] Template/Design CSS
 - [x] User controller
 - [x] User entity
