@@ -17,6 +17,10 @@ public class User {
     private String lastName;
     @Column(name = "user_name")
     private String userName;
+    @Column(name = "password")
+    private String userPassword;
+    @Column(name = "email")
+    private String userEmail;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
     @GenericGenerator(name = "native",strategy = "native")
@@ -82,6 +86,38 @@ public class User {
      */
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    /**
+     * Gets user's password
+     * @return password
+     */
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    /**
+     * Sets user's password
+     * @param userPassword user password
+     */
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    /**
+     * Gets user's email
+     * @return email
+     */
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    /**
+     * Sets user's email
+     * @param userEmail user email
+     */
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     /**
