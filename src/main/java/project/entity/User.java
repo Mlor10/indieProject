@@ -4,7 +4,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A class to represent a user
@@ -28,6 +30,9 @@ public class User {
     private int id;
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Card> cards = new HashSet<>();
 
     /**
      * Instantiates a new user
@@ -155,6 +160,44 @@ public class User {
      */
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    /**
+     * Gets cards.
+     *
+     * @return the cards
+     */
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    /**
+     * Sets cards.
+     *
+     * @param cards the cards
+     */
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
+    }
+
+    /**
+     * Add card.
+     *
+     * @param card the card
+     */
+    public void addCard(Card card) {
+        cards.add(card);
+        card.setUser(this);
+    }
+
+    /**
+     * Remove card.
+     *
+     * @param card the card
+     */
+    public void removeCard(Card card) {
+        cards.remove(card);
+        card.setUser(null);
     }
 
     @Override

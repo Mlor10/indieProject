@@ -3,7 +3,6 @@ package project.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -17,13 +16,20 @@ public class Card {
     @Column(name = "card_description")
     private String cardDescription;
     @Column(name = "price")
-    private int cardPrice;
+    private double cardPrice;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
     @GenericGenerator(name = "native",strategy = "native")
     private int id;
-    @Column(name = "user_id")
-    private int userId;
+
+    @ManyToOne
+    private User user;
+
+    /**
+     * Instantiates a new card
+     */
+    public Card() {
+    }
 
     /**
      * Gets card name.
@@ -66,7 +72,7 @@ public class Card {
      *
      * @return the card price
      */
-    public int getCardPrice() {
+    public double getCardPrice() {
         return cardPrice;
     }
 
@@ -75,7 +81,7 @@ public class Card {
      *
      * @param cardPrice the card price
      */
-    public void setCardPrice(int cardPrice) {
+    public void setCardPrice(double cardPrice) {
         this.cardPrice = cardPrice;
     }
 
@@ -98,21 +104,21 @@ public class Card {
     }
 
     /**
-     * Gets user id.
+     * Gets user.
      *
-     * @return the user id
+     * @return the user
      */
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * Sets user id.
+     * Sets user.
      *
-     * @param userId the user id
+     * @param user the user
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -122,7 +128,20 @@ public class Card {
                 ", cardDescription='" + cardDescription + '\'' +
                 ", cardPrice=" + cardPrice +
                 ", id=" + id +
-                ", userId=" + userId +
-                '}';
+                ", userId= " + user.getId() +
+                "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return Double.compare(card.cardPrice, cardPrice) == 0 && id == card.id && cardName.equals(card.cardName) && Objects.equals(cardDescription, card.cardDescription) && user.equals(card.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardName, cardDescription, cardPrice, id, user);
     }
 }

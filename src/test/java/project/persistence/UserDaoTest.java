@@ -9,12 +9,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 class UserDaoTest {
-    UserDao dao;
     GenericDao genericDao;
 
     @BeforeEach
     void setUp() {
-        dao = new UserDao();
         genericDao = new GenericDao(User.class);
         Database database = Database.getInstance();
         database.runSQL("cleandb.sql");
