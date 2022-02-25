@@ -44,3 +44,16 @@ Completed user stories, project plan, and screen design. These design documents 
 - [x] Unit test user dao
 <!-- end of the list -->
 Completed user database and the java classes that go along with it. Also, started on templates and the website design such as the navigation bar.
+
+**Week 6**
+2/25/22
+- [x] Card entity
+- [x] Card dao
+- [x] Card dao crud
+- [x] Create card database
+- [x] Unit test card dao
+- [x] One-to-Many relationship between User and Card database setup
+<!-- end of the list -->
+Completed the card dao, crud, and tests for it. Also, finished making a one-to-many relationship between user and card database.
+- [ ] AWS Setup
+<!-- end of the list -->
