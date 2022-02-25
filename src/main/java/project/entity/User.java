@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * A class to represent a user
@@ -154,5 +155,20 @@ public class User {
      */
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName)
+                && userName.equals(user.userName) && userPassword.equals(user.userPassword)
+                && userEmail.equals(user.userEmail) && Objects.equals(dateOfBirth, user.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, userName, userPassword, userEmail, id, dateOfBirth);
     }
 }
