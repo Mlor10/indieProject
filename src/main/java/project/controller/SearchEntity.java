@@ -1,5 +1,7 @@
 package project.controller;
-import project.persistence.UserDao;
+import project.entity.Card;
+import project.entity.User;
+import project.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,23 +16,26 @@ import java.io.IOException;
  */
 
 @WebServlet(
-        urlPatterns = {"/searchUser"}
+        urlPatterns = {"/searchEntity"}
 )
 
-public class SearchUser extends HttpServlet {
+public class SearchEntity extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // grabs the search term from the form
         String searchTerm = req.getParameter("searchTerm");
 
-        UserDao userDao = new UserDao();
+        GenericDao userDao = new GenericDao(User.class);
+        GenericDao cardDao = new GenericDao(Card.class);
 
         // checks if search term is empty or not to display the search results or all the users
         // username property name is filler
         if (searchTerm != null) {
             req.setAttribute("users", userDao.getByPropertyLike("userName", searchTerm));
+            req.setAttribute("cards", cardDao.getByPropertyLike("cardName", searchTerm));
         } else {
-            req.setAttribute("users", userDao.getAllUsers());
+            req.setAttribute("users", userDao.getAllEntities());
+            req.setAttribute("cards", cardDao.getAllEntities());
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");

@@ -2,7 +2,7 @@
 <c:import url="template/head.jsp" />
 <script type="text/javascript" class="init">
     $(document).ready( function () {
-        $('#searchTable').DataTable();
+        $('.searchTable').DataTable();
     } );
 </script>
 <html>
@@ -14,9 +14,9 @@
         <div class="row">
             <c:import url="template/navigation.jsp" />
         </div>
-        <h2>Search Results: </h2>
+        <h3>Users</h3>
         <c:if test="${users != null}">
-            <table id="searchTable" class="display table table-hover">
+            <table class="searchTable display table table-hover">
                 <thead>
                     <th>Username</th>
                 </thead>
@@ -24,6 +24,21 @@
                 <c:forEach var="user" items="${users}">
                     <tr>
                         <th>${user.userName}</th>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+        <h3>Cards</h3>
+        <c:if test="${cards != null}">
+            <table class="searchTable display table table-hover">
+                <thead>
+                <th>Card Name</th>
+                </thead>
+                <tbody>
+                <c:forEach var="card" items="${cards}">
+                    <tr>
+                        <th>${card.cardName}</th>
                     </tr>
                 </c:forEach>
                 </tbody>
