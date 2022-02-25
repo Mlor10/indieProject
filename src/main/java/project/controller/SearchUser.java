@@ -28,7 +28,7 @@ public class SearchUser extends HttpServlet {
         // checks if search term is empty or not to display the search results or all the users
         // username property name is filler
         if (searchTerm != null) {
-            req.setAttribute("users", userDao.getByPropertyLike("username", searchTerm));
+            req.setAttribute("users", userDao.getByPropertyLike("userName", searchTerm));
         } else {
             req.setAttribute("users", userDao.getAllUsers());
         }

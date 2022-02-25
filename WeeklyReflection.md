@@ -53,7 +53,6 @@ Completed user database and the java classes that go along with it. Also, starte
 - [x] Create card database
 - [x] Unit test card dao
 - [x] One-to-Many relationship between User and Card database setup
+- [x] AWS Setup
 <!-- end of the list -->
-Completed the card dao, crud, and tests for it. Also, finished making a one-to-many relationship between user and card database.
-- [ ] AWS Setup
-<!-- end of the list -->
+Completed the card dao, crud, and tests for it. Also, finished making a one-to-many relationship between user and card database. Then, I finished setting up AWS for my indie project database.
