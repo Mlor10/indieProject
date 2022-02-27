@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 public interface PropertiesLoader {
-    private final Logger logger = LogManager.getLogger(this.getClass());
     default Properties loadProperties(String propertiesFilePath) {
+        final Logger logger = LogManager.getLogger(this.getClass());
         Properties properties = new Properties();
         try {
             properties.load (this.getClass().getResourceAsStream(propertiesFilePath));
