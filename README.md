@@ -19,6 +19,7 @@ from the trading card game industry.
 ### Design
 * [User Stories](DesignDocuments/UserStories.md)
 * [Screen Design](DesignDocuments/Screens.md)
+* [DB Diagram](DesignDocuments/db-diagram.png)
 
 ### [Project Plan](DesignDocuments/ProjectPlan.md)
 
