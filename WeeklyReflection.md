@@ -56,3 +56,17 @@ Completed user database and the java classes that go along with it. Also, starte
 - [x] AWS Setup
 <!-- end of the list -->
 Completed the card dao, crud, and tests for it. Also, finished making a one-to-many relationship between user and card database. Then, I finished setting up AWS for my indie project database.
+
+**Week 7**
+N/A
+
+**Week 8**
+N/A
+
+**Week 9**
+3/23/22
+- [x] Auth
+- [x] Login
+- [x] Logout
+<!-- end of the list -->
+Added in Auth with login and logout feature in the navigation bar, the home page also welcomes the user if they are logged in

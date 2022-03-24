@@ -9,8 +9,12 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="indexServlet">Cards</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Threads</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link" href="logIn">Sign In</a></li>
+                <c:if test="${userName == null}">
+                    <li class="nav-item"><a class="nav-link" href="logIn">Sign Up/In</a></li>
+                </c:if>
+                <c:if test="${userName != null}">
+                    <li class="nav-item"><a class="nav-link" href="logOut">Log Out</a></li>
+                </c:if>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li>

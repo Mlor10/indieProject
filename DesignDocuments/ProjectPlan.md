@@ -1,27 +1,27 @@
 # Project Plan
 
 ### Week 3
-- [ ] Weekly Reflection
+- [x] Weekly Reflection
 <!-- end of the list -->
 
 ### Week 4
-- [ ] Weekly reflection
-- [ ] Design documents
-- [ ] Template/Design CSS
-- [ ] User controller
-- [ ] User entity
-- [ ] User dao
-- [ ] Create user database
-- [ ] Unit test user dao
+- [x] Weekly reflection
+- [x] Design documents
+- [x] Template/Design CSS
+- [x] User controller
+- [x] User entity
+- [x] User dao
+- [x] Create user database
+- [x] Unit test user dao
 <!-- end of the list -->
 
 ### Week 5
-- [ ] Weekly Reflection
-- [ ] Card listing controller
-- [ ] Card entity
-- [ ] Card dao
-- [ ] Create card listing database
-- [ ] Unit test card dao
+- [x] Weekly Reflection
+- [x] Card listing controller
+- [x] Card entity
+- [x] Card dao
+- [x] Create card listing database
+- [x] Unit test card dao
 - [ ] Thread post controller
 - [ ] Thread entity
 - [ ] Thread dao
@@ -30,7 +30,7 @@
 <!-- end of the list -->
 
 ### Week 6
-- [ ] Weekly Reflection
+- [x] Weekly Reflection
 - [ ] Reports post controller
 - [ ] Report entity
 - [ ] Report dao
@@ -39,12 +39,12 @@
 <!-- end of the list -->
 
 ### Week 7
-- [ ] Weekly Reflection
-- [ ] User login/register security authentication
+- [x] Weekly Reflection
+- [x] User login/register security authentication
 <!-- end of the list -->
 
 ### Week 8
-- [ ] Weekly Reflection
+- [x] Weekly Reflection
 - [ ] User reviews controller
 - [ ] Review entity
 - [ ] Review dao
@@ -53,7 +53,7 @@
 <!-- end of the list -->
 
 ### Week 9
-- [ ] Weekly Reflection
+- [x] Weekly Reflection
 - [ ] Hover over user's profile in thread posts to see some of their account info such as description
 <!-- end of the list -->
 

@@ -10,8 +10,12 @@
     <div class="row">
         <%@include file="template/navigation.jsp"%>
     </div>
-
-    <h2 class="text-center">Welcome</h2>
+    <c:if test="${userName == null}">
+        <h2 class="text-center">Welcome</h2>
+    </c:if>
+    <c:if test="${userName != null}">
+        <h2 class="text-center">Welcome ${userName}</h2>
+    </c:if>
 </div>
 
 <%@include file="template/bs-js.jsp" %>
