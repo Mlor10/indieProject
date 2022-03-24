@@ -48,6 +48,10 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# Cert Folders
+/.ebextensions/
+/.plaform/
+
 # Cert Keys
 https-instance.config
 https-instance-single.config
