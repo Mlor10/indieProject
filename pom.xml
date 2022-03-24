@@ -27,6 +27,9 @@
     <maven-surefire-plugin-version>2.19</maven-surefire-plugin-version>
     <hibernate-version>5.4.4.Final</hibernate-version>
     <hibernate-c3p0-version>5.4.4.Final</hibernate-c3p0-version>
+    <java-jwt-version>3.4.1</java-jwt-version>
+    <json-version>20170516</json-version>
+    <commons-io-version>2.11.0</commons-io-version>
   </properties>
 
   <dependencies>
@@ -94,6 +97,23 @@
       <artifactId>hibernate-c3p0</artifactId>
       <version>${hibernate-c3p0-version}</version>
     </dependency>
+    <!-- for parsing access token -->
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>${java-jwt-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>${json-version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons-io-version}</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>YourIndieProject</finalName>
@@ -114,6 +134,24 @@
               <version>${junit-platform-runner-version}</version>
             </dependency>
           </dependencies>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+          <configuration>
+            <webResources>
+              <resource>
+                <directory>src/main/.platform</directory>
+                <targetPath>.platform</targetPath>
+                <filtering>true</filtering>
+              </resource>
+              <resource>
+                <directory>src/main/.ebextensions</directory>
+                <targetPath>.ebextensions</targetPath>
+                <filtering>true</filtering>
+              </resource>
+            </webResources>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>

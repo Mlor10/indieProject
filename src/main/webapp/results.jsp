@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="template/head.jsp" />
+<%@include file="template/head.jsp"%>
 <script type="text/javascript" class="init">
     $(document).ready( function () {
         $('.searchTable').DataTable();
@@ -9,10 +9,10 @@
 <body>
     <div class="container">
         <div class="row">
-            <c:import url="template/header.jsp" />
+            <%@include file="template/header.jsp"%>
         </div>
         <div class="row">
-            <c:import url="template/navigation.jsp" />
+            <%@include file="template/navigation.jsp"%>
         </div>
         <h3>Users</h3>
         <c:if test="${users != null}">
@@ -45,6 +45,6 @@
             </table>
         </c:if>
     </div>
-
+    <%@include file="template/bs-js.jsp" %>
 </body>
 </html>

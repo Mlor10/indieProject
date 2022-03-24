@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="template/head.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
 <div class="container">
@@ -10,10 +10,9 @@
     <div class="row">
         <%@include file="template/navigation.jsp"%>
     </div>
-
-    <h2 class="text-center">Welcome</h2>
+<h1 class="text-center">ERROR</h1>
 </div>
-
-<%@include file="template/bs-js.jsp" %>
 </body>
+<%@include file="template/bs-js.jsp" %>
 </html>
+
