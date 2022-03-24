@@ -10,7 +10,7 @@
                 <li class="nav-item"><a class="nav-link" href="indexServlet">Cards</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Threads</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
+                <li class="nav-item"><a class="nav-link" href="logIn">Sign In</a></li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li>
