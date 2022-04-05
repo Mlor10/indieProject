@@ -1,18 +1,18 @@
-<%@include file="template/head.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="template/taglib.jsp" %>
+<c:import url="template/head.jsp" />
 <html>
 <body>
 <div class="container">
     <div class="row">
-        <%@include file="template/header.jsp"%>
+        <c:import url="template/header.jsp" />
     </div>
 
     <div class="row">
-        <%@include file="template/navigation.jsp"%>
+        <c:import url="template/navigation.jsp" />
     </div>
 <h1 class="text-center">ERROR</h1>
 </div>
 </body>
-<%@include file="template/bs-js.jsp" %>
+<c:import url="template/bs-js.jsp" />
 </html>
 
