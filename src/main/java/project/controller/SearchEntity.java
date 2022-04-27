@@ -1,6 +1,7 @@
 package project.controller;
 import project.entity.Card;
 import project.entity.User;
+import project.entity.Thread;
 import project.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -27,15 +28,18 @@ public class SearchEntity extends HttpServlet {
 
         GenericDao userDao = new GenericDao(User.class);
         GenericDao cardDao = new GenericDao(Card.class);
+        GenericDao threadDao = new GenericDao(Thread.class);
 
         // checks if search term is empty or not to display the search results or all the users
         // username property name is filler
         if (searchTerm != null) {
             req.setAttribute("users", userDao.getByPropertyLike("userName", searchTerm));
             req.setAttribute("cards", cardDao.getByPropertyLike("cardName", searchTerm));
+            req.setAttribute("threads", threadDao.getByPropertyLike("threadTitle", searchTerm));
         } else {
             req.setAttribute("users", userDao.getAllEntities());
             req.setAttribute("cards", cardDao.getAllEntities());
+            req.setAttribute("threads", threadDao.getAllEntities());
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
