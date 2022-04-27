@@ -14,6 +14,9 @@
         <div class="row">
             <c:import url="template/navigation.jsp" />
         </div>
+        <c:if test="${(users == null) and (cards == null) and (threads == null)}">
+            <h3>No Results Found</h3>
+        </c:if>
         <c:if test="${users != null}">
             <h3>Users</h3>
             <table class="searchTable display table table-hover">
