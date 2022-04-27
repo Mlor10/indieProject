@@ -14,10 +14,10 @@
         <div class="row">
             <c:import url="template/navigation.jsp" />
         </div>
-        <c:if test="${(users == null) and (cards == null) and (threads == null)}">
-            <h3>No Results Found</h3>
+        <c:if test="${(empty users) and (empty cards) and (empty threads)}">
+            <h3 class="text-center pt-3">No Results Found</h3>
         </c:if>
-        <c:if test="${users != null}">
+        <c:if test="${not empty users}">
             <h3>Users</h3>
             <table class="searchTable display table table-hover">
                 <thead>
@@ -32,7 +32,7 @@
                 </tbody>
             </table>
         </c:if>
-        <c:if test="${cards != null}">
+        <c:if test="${not empty cards}">
             <h3>Cards</h3>
             <table class="searchTable display table table-hover">
                 <thead>
@@ -43,24 +43,24 @@
                 <c:forEach var="card" items="${cards}">
                     <tr>
                         <th>${card.cardName}</th>
-                        <th>${card.user}</th>
+                        <th>${card.user.userName}</th>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </c:if>
-        <c:if test="${threads != null}">
+        <c:if test="${not empty threads}">
             <h3>Threads</h3>
             <table class="searchTable display table table-hover">
                 <thead>
                 <th>Thread Title</th>
-                <th>Thread User</th>
+                <th>Thread's Author</th>
                 </thead>
                 <tbody>
                 <c:forEach var="thread" items="${threads}">
                     <tr>
                         <th>${thread.threadTitle}</th>
-                        <th>${thread.user}</th>
+                        <th>${thread.user.userName}</th>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -68,5 +68,9 @@
         </c:if>
     </div>
     <c:import url="template/bs-js.jsp" />
+
+    <c:remove var="users" />
+    <c:remove var="cards" />
+    <c:remove var="threads" />
 </body>
 </html>
