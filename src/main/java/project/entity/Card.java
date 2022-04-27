@@ -32,6 +32,20 @@ public class Card {
     }
 
     /**
+     * Constructor for a new card
+     * @param cardName card name
+     * @param cardDescription card description
+     * @param cardPrice card price
+     * @param user card's user
+     */
+    public Card(String cardName, String cardDescription, double cardPrice, User user) {
+        this.cardName = cardName;
+        this.cardDescription = cardDescription;
+        this.cardPrice = cardPrice;
+        this.user = user;
+    }
+
+    /**
      * Gets card name.
      *
      * @return the card name
@@ -137,7 +151,10 @@ public class Card {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
-        return Double.compare(card.cardPrice, cardPrice) == 0 && id == card.id && cardName.equals(card.cardName) && Objects.equals(cardDescription, card.cardDescription) && user.equals(card.user);
+        return Double.compare(card.cardPrice, cardPrice) == 0
+                && id == card.id && cardName.equals(card.cardName)
+                && Objects.equals(cardDescription, card.cardDescription)
+                && user.equals(card.user);
     }
 
     @Override

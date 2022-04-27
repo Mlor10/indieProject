@@ -1,5 +1,7 @@
 package project.persistence;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import project.entity.Card;
@@ -11,12 +13,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardDaoTest {
-    GenericDao genericDao;
+    GenericDao genericDaoCard;
     GenericDao genericDaoUser;
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     @BeforeEach
     void setUp() {
-        genericDao = new GenericDao(Card.class);
+        genericDaoCard = new GenericDao(Card.class);
         genericDaoUser = new GenericDao(User.class);
         Database database = Database.getInstance();
         database.runSQL("cleandb.sql");
@@ -27,7 +30,7 @@ class CardDaoTest {
      */
     @Test
     void getAllCardsSuccess() {
-        List<Card> retrievedCards = genericDao.getAllEntities();
+        List<Card> retrievedCards = genericDaoCard.getAllEntities();
         assertEquals(6, retrievedCards.size());
     }
 
@@ -36,10 +39,10 @@ class CardDaoTest {
      */
     @Test
     void getByPropertyLikeSuccess() {
-        List<Card> cards = genericDao.getAllEntities();
-        List<Card> actualCards = genericDao.getByPropertyLike("cardName","Omnimon");
+        List<Card> expectedCards = genericDaoCard.getAllEntities();
+        List<Card> actualCards = genericDaoCard.getByPropertyLike("cardName","Omnimon");
         assertEquals(1, actualCards.size());
-        assertNotEquals(cards, actualCards);
+        assertNotEquals(expectedCards, actualCards);
     }
 
     /**
@@ -47,8 +50,8 @@ class CardDaoTest {
      */
     @Test
     void getByIdSuccess() {
-        Card expectedCard = (Card)genericDao.getAllEntities().get(0);
-        Card retrievedCard = (Card)genericDao.getById(1);
+        Card expectedCard = (Card) genericDaoCard.getAllEntities().get(0);
+        Card retrievedCard = (Card) genericDaoCard.getById(1);
 
         assertNotNull(retrievedCard);
         assertEquals(expectedCard, retrievedCard);
@@ -60,11 +63,11 @@ class CardDaoTest {
     @Test
     void updateSuccess() {
         String newCardName = "Alphamon";
-        Card cardToUpdate = (Card)genericDao.getById(1);
+        Card cardToUpdate = (Card) genericDaoCard.getById(1);
         cardToUpdate.setCardName(newCardName);
-        genericDao.saveOrUpdate(cardToUpdate);
+        genericDaoCard.saveOrUpdate(cardToUpdate);
 
-        Card retrievedCard = (Card)genericDao.getById(1);
+        Card retrievedCard = (Card) genericDaoCard.getById(1);
         assertEquals(cardToUpdate, retrievedCard);
     }
 
@@ -73,12 +76,12 @@ class CardDaoTest {
      */
     @Test
     void deleteSuccess() {
-        List<Card> cards = genericDao.getAllEntities();
-        genericDao.delete(genericDao.getById(1));
-        List<Card> actualCards = genericDao.getAllEntities();
+        List<Card> expectedCards = genericDaoCard.getAllEntities();
+        genericDaoCard.delete(genericDaoCard.getById(1));
+        List<Card> actualCards = genericDaoCard.getAllEntities();
 
-        assertNull(genericDao.getById(1));
-        assertNotEquals(cards, actualCards);
+        assertNull(genericDaoCard.getById(1));
+        assertNotEquals(expectedCards, actualCards);
     }
 
     /**
@@ -88,16 +91,11 @@ class CardDaoTest {
     void insertSuccess() {
         List<Card> cardsAfter;
         List<User> retrievedUsers = genericDaoUser.getAllEntities();
-        Card cardToInsert = new Card();
         User retrievedUser = retrievedUsers.get(5);
+        Card cardToInsert = new Card("Beelzemon", "example description", 7.99, retrievedUser);
 
-        cardToInsert.setCardName("Beelzemon");
-        cardToInsert.setCardDescription("example description");
-        cardToInsert.setCardPrice(7.99);
-        cardToInsert.setUser(retrievedUser);
-
-        genericDao.insert(cardToInsert);
-        cardsAfter = genericDao.getAllEntities();
+        genericDaoCard.insert(cardToInsert);
+        cardsAfter = genericDaoCard.getAllEntities();
         Card expectedCard = cardsAfter.get(6);
 
         assertEquals("matt6", retrievedUser.getUserName());

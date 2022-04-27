@@ -3,7 +3,7 @@ package project.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -29,15 +29,39 @@ public class User {
     @GenericGenerator(name = "native",strategy = "native")
     private int id;
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Thread> threads = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Reply> replies = new HashSet<>();
 
     /**
      * Instantiates a new user
      */
     public User() {
+    }
+
+    /**
+     * Constructor for a new user
+     * @param firstName user firstname
+     * @param lastName user lastname
+     * @param userName user username
+     * @param userPassword user password
+     * @param userEmail user email
+     * @param dateOfBirth user date of birth
+     */
+    public User(String firstName, String lastName, String userName, String userPassword, String userEmail, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.dateOfBirth = dateOfBirth;
     }
 
     /**
@@ -149,7 +173,7 @@ public class User {
      *
      * @return date of birth
      */
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -158,12 +182,12 @@ public class User {
      *
      * @param dateOfBirth user date of birth
      */
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
     /**
-     * Gets cards.
+     * Gets cards
      *
      * @return the cards
      */
@@ -172,7 +196,7 @@ public class User {
     }
 
     /**
-     * Sets cards.
+     * Sets cards
      *
      * @param cards the cards
      */
@@ -181,7 +205,7 @@ public class User {
     }
 
     /**
-     * Add card.
+     * Add card
      *
      * @param card the card
      */
@@ -191,13 +215,89 @@ public class User {
     }
 
     /**
-     * Remove card.
+     * Remove card
      *
      * @param card the card
      */
     public void removeCard(Card card) {
         cards.remove(card);
         card.setUser(null);
+    }
+
+    /**
+     * Gets the threads
+     *
+     * @return user's threads
+     */
+    public Set<Thread> getThreads() {
+        return threads;
+    }
+
+    /**
+     * Sets the threads
+     *
+     * @param threads threads
+     */
+    public void setThreads(Set<Thread> threads) {
+        this.threads = threads;
+    }
+
+    /**
+     * Add thread
+     *
+     * @param thread the thread
+     */
+    public void addThread(Thread thread) {
+        threads.add(thread);
+        thread.setUser(this);
+    }
+
+    /**
+     * Remove thread
+     *
+     * @param thread the thread
+     */
+    public void removeThread(Thread thread) {
+        threads.remove(thread);
+        thread.setUser(null);
+    }
+
+    /**
+     * Gets replies
+     *
+     * @return the replies
+     */
+    public Set<Reply> getReplies() {
+        return replies;
+    }
+
+    /**
+     * Sets replies
+     *
+     * @param replies the replies
+     */
+    public void setReplies(Set<Reply> replies) {
+        this.replies = replies;
+    }
+
+    /**
+     * Add reply
+     *
+     * @param reply the reply
+     */
+    public void addReply(Reply reply) {
+        replies.add(reply);
+        reply.setUser(this);
+    }
+
+    /**
+     * Remove reply
+     *
+     * @param reply the reply
+     */
+    public void removeReply(Reply reply) {
+        replies.remove(reply);
+        reply.setUser(null);
     }
 
     @Override
@@ -218,9 +318,13 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName)
-                && userName.equals(user.userName) && userPassword.equals(user.userPassword)
-                && userEmail.equals(user.userEmail) && Objects.equals(dateOfBirth, user.dateOfBirth);
+        return id == user.id
+                && Objects.equals(firstName, user.firstName)
+                && Objects.equals(lastName, user.lastName)
+                && userName.equals(user.userName)
+                && userPassword.equals(user.userPassword)
+                && userEmail.equals(user.userEmail)
+                && Objects.equals(dateOfBirth, user.dateOfBirth);
     }
 
     @Override

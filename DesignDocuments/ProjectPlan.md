@@ -22,11 +22,11 @@
 - [x] Card dao
 - [x] Create card listing database
 - [x] Unit test card dao
-- [ ] Thread post controller
-- [ ] Thread entity
-- [ ] Thread dao
-- [ ] Create thread posts database
-- [ ] Unit test thread dao
+- [x] Thread post controller
+- [x] Thread entity
+- [x] Thread dao
+- [x] Create thread posts database
+- [x] Unit test thread dao
 <!-- end of the list -->
 
 ### Week 6
@@ -58,24 +58,24 @@
 <!-- end of the list -->
 
 ### Week 10
-- [ ] Weekly Reflection
+- [x] Weekly Reflection
 - [ ] User upload profile images directory
 - [ ] User upload card listing images directory
 <!-- end of the list -->
 
 ### Week 11
-- [ ] Weekly Reflection
+- [x] Weekly Reflection
 - [ ] Java image shrinking or expanding (so all images are the same size for profile and card listings)
 <!-- end of the list -->
 
 ### Week 12
-- [ ] Weekly Reflection
+- [x] Weekly Reflection
 - [ ] Sort users
 - [ ] Sort threads
 <!-- end of the list -->
 
 ### Week 13
-- [ ] Weekly Reflection
+- [x] Weekly Reflection
 - [ ] Search card listings
 - [ ] Search threads
 <!-- end of the list -->

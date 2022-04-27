@@ -70,3 +70,24 @@ N/A
 - [x] Logout
 <!-- end of the list -->
 Added in Auth with login and logout feature in the navigation bar, the home page also welcomes the user if they are logged in
+
+**Week 10**
+N/A
+
+**Week 11**
+N/A
+
+**Week 12**
+N/A
+
+**Week 13**
+N/A
+
+**Week 14**
+4/26/22
+- [x] Thread Dao
+- [x] Thread Dao Test
+- [x] Replies Dao
+- [x] Replies Dao Test
+<!-- end of the list -->
+Added in Thread and Replies Dao. Updated db-diagram. Updated User Dao to include a test method for testing removal of attached entities.

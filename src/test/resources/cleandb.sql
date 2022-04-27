@@ -1,6 +1,12 @@
-delete from user;
+delete from reply;
+delete from thread;
 delete from card;
+delete from user;
 ALTER TABLE user AUTO_INCREMENT = 1;
 ALTER TABLE card AUTO_INCREMENT = 1;
+ALTER TABLE thread AUTO_INCREMENT = 1;
+ALTER TABLE reply AUTO_INCREMENT = 1;
 INSERT INTO user (user_name, password, email) VALUES ('matt1', 'pass1', 'm1@madisoncollege.edu'), ('matt2', 'pass2', 'm2@madisoncollege.edu'), ('matt3', 'pass3', 'm3@madisoncollege.edu'), ('matt4', 'pass4', 'm4@madisoncollege.edu'), ('matt5', 'pass5', 'm5@madisoncollege.edu'), ('matt6', 'pass6', 'm6@madisoncollege.edu');
 INSERT INTO card (card_name, card_description, price, user_id) VALUES ('Omnimon', 'example description', '12.99', '1'), ('Gallantmon', 'example description', '11.00', '1'), ('Dukemon', 'example description', '16.50', '2'), ('Agumon', 'example description', '4.99', '3'), ('Veemon', 'example description', '3.99', '4'), ('Lucemon', 'example description', '14.00', '5');
+INSERT INTO thread (thread_title, thread_content, thread_views, thread_replies, thread_date, user_id) VALUES ('Omnimon is the best', 'example content', '16', '0', '2022-04-26','1'), ('Hybrid decks coming out soon', 'example content', '152', '0', '2022-04-26', '1'), ('When will this card get banned', 'example content', '102', '0', '2022-04-26', '2'), ('Rookie rush guide', 'example content', '706', '0', '2022-04-26', '3'), ('LordKnightmon deck guide', 'example content', '53', '0', '2022-04-26', '4'), ('Which yellow decks to use', 'example content', '0', '0', '2022-04-26', '5');
+INSERT INTO reply (reply_title, reply_content, reply_date, thread_id, user_id) VALUES ('I agree', 'example content', '2022-04-26','1', '1'), ('I also agree', 'example content', '2022-04-26','1', '2'), ('I am hyped', 'example content', '2022-04-26','2', '1'), ('OMG OMG My wallet is ready', 'example content', '2022-04-26','2', '3'), ('Take my money', 'example content', '2022-04-26','2', '4'), ('Thanks for the guide', 'example content', '2022-04-26','5', '5');
