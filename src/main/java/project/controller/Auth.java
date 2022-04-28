@@ -7,6 +7,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import project.auth.*;
+import project.entity.User;
+import project.persistence.GenericDao;
 import project.utilities.PropertiesLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.URI;
@@ -44,7 +47,6 @@ import java.util.stream.Collectors;
 /**
  * Inspired by: https://stackoverflow.com/questions/52144721/how-to-get-access-token-using-client-credentials-using-java-code
  */
-
 public class Auth extends HttpServlet implements PropertiesLoader {
     Properties properties;
     String CLIENT_ID;
@@ -55,6 +57,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     String REGION;
     String POOL_ID;
     Keys jwks;
+    GenericDao genericDaoUser;
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
@@ -71,6 +74,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         REGION = properties.getProperty("region");
         POOL_ID = properties.getProperty("poolId");
         loadKey();
+        genericDaoUser = new GenericDao(User.class);
     }
 
     /**
@@ -82,16 +86,23 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession userSession = req.getSession();
         String authCode = req.getParameter("code");
-        String userName = null;
+        Map<String, String> userInfo;
 
         if (authCode == null) {
         } else {
             HttpRequest authRequest = buildAuthRequest(authCode);
             try {
                 TokenResponse tokenResponse = getToken(authRequest);
-                userName = validate(req, resp, tokenResponse);
-                req.setAttribute("userName", userName);
+                userInfo = validate(req, resp, tokenResponse);
+                // sets user token information into session scope
+                userSession.setAttribute("userName", userInfo.get("userName"));
+                userSession.setAttribute("userEmail", userInfo.get("userEmail"));
+                userSession.setAttribute("userAccessToken", tokenResponse.getAccessToken());
+                userSession.setAttribute("userIdToken", tokenResponse.getIdToken());
+                userSession.setAttribute("userRefreshToken", tokenResponse.getRefreshToken());
+                checkDatabaseForUser(req);
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("error");
@@ -129,18 +140,17 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         logger.debug("Id token: " + tokenResponse.getIdToken());
 
         return tokenResponse;
-
     }
 
     /**
      * Get values out of the header to verify the token is legit. If it is legit, get the claims from it, such
-     * as username.
+     * as username and email.
      * @param tokenResponse token code
-     * @return username
+     * @return user name and email
      * @throws IOException
      * @throws ServletException
      */
-    private String validate(HttpServletRequest req, HttpServletResponse resp, TokenResponse tokenResponse) throws IOException, ServletException {
+    private Map<String, String> validate(HttpServletRequest req, HttpServletResponse resp, TokenResponse tokenResponse) throws IOException, ServletException {
         ObjectMapper mapper = new ObjectMapper();
         CognitoTokenHeader tokenHeader = mapper.readValue(CognitoJWTParser.getHeader(tokenResponse.getIdToken()).toString(), CognitoTokenHeader.class);
 
@@ -180,13 +190,18 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         // Verify the token
         DecodedJWT jwt = verifier.verify(tokenResponse.getIdToken());
         String userName = jwt.getClaim("cognito:username").asString();
+        String userEmail = jwt.getClaim("email").asString();
         logger.debug("here's the username: " + userName);
+        logger.debug("here's the user's email: " + userEmail);
 
         logger.debug("here are all the available claims: " + jwt.getClaims());
 
-        // for now, I'm just returning username for display back to the browser
+        // hashmap to hold the user info
+        Map<String, String> userInfo = new HashMap<>();
+        userInfo.put("userName", userName);
+        userInfo.put("userEmail", userEmail);
 
-        return userName;
+        return userInfo;
     }
 
     /** Create the auth url and use it to build the request.
@@ -239,6 +254,38 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             logger.error("Cannot load json..." + ioException.getMessage(), ioException);
         } catch (Exception e) {
             logger.error("Error loading json" + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Checks application database for user to add new user
+     * @param req servlet request
+     */
+    private void checkDatabaseForUser(HttpServletRequest req) {
+        HttpSession userSession = req.getSession();
+        String userName = (String)userSession.getAttribute("userName");
+        String userEmail = (String)userSession.getAttribute("userEmail");
+        List<User> searchUser = genericDaoUser.getByPropertyEqual("userName", userName);
+        // checks the searched username if there were any before inserting into the database
+        if (searchUser.isEmpty()) {
+            insertUserToDatabase(userName, userEmail);
+        } else {
+            logger.info(userName + " already exists in the database. Continuing to home page.");
+        }
+    }
+
+    /**
+     * Inserts the user info into the database as a new user
+     * @param userName username
+     * @param userEmail user email
+     */
+    private void insertUserToDatabase(String userName, String userEmail) {
+        try {
+            User newUser = new User(null, null, userName, userEmail, null);
+            genericDaoUser.insert(newUser);
+            logger.info(userName + " added to database. Continuing to home page.");
+        } catch (Exception e) {
+            logger.error("Exception error in inserting user to database: ", e);
         }
     }
 }

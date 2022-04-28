@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -46,9 +47,11 @@ public class LogOut extends HttpServlet implements PropertiesLoader {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession userSession = req.getSession();
         String url = "";
         if (this.properties != null && LOGOUT_URL != null && CLIENT_ID != null && SIGNOUT_URL != null) {
-            url = LOGOUT_URL + "?response_type=code&client_id=" + CLIENT_ID + "&logout_uri=" + SIGNOUT_URL;
+            url = LOGOUT_URL + "?client_id=" + CLIENT_ID + "&logout_uri=" + SIGNOUT_URL;
+            userSession.invalidate();
         } else {
             url = "error";
         }

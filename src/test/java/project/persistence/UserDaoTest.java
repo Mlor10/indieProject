@@ -51,6 +51,17 @@ class UserDaoTest {
     }
 
     /**
+     * verifies get all users based on property name and entered value
+     */
+    @Test
+    void getByPropertyEqualSuccess() {
+        List<User> expectedUsers = genericDaoUser.getAllEntities();
+        List<User> actualUsers = genericDaoUser.getByPropertyEqual("userName","matt2");
+        assertEquals(1, actualUsers.size());
+        assertNotEquals(expectedUsers, actualUsers);
+    }
+
+    /**
      * verifies get id of user
      */
     @Test
@@ -95,7 +106,7 @@ class UserDaoTest {
     @Test
     void insertSuccess() {
         List<User> usersAfter;
-        User userToInsert = new User(null, null, "matt7", "pass7", "m7@madisoncollege.edu", null);
+        User userToInsert = new User(null, null, "matt7", "m7@madisoncollege.edu", null);
         logger.info(userToInsert.getId());
 
         genericDaoUser.insert(userToInsert);
@@ -112,7 +123,7 @@ class UserDaoTest {
     void insertWithCardSuccess() {
         List<User> usersAfter;
         List<Card> cardsAfter;
-        User userToInsert = new User(null, null, "matt7", "pass7", "m7@madisoncollege.edu", null);
+        User userToInsert = new User(null, null, "matt7", "m7@madisoncollege.edu", null);
         Card cardToInsert = new Card("Beelzemon", "example description", 7.99, userToInsert);
         genericDaoUser.insert(userToInsert);
         genericDaoCard.insert(cardToInsert);

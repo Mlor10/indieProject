@@ -103,7 +103,7 @@ public class GenericDao<T> {
     }
 
     /**
-     * Get entity by property value and entered value
+     * Get entities by property value and entered value
      * @param propertyName property name of entity
      * @param value search value
      * @return list of searched entities
@@ -119,6 +119,29 @@ public class GenericDao<T> {
         Expression<String> propertyPath = root.get(propertyName);
 
         query.where(builder.like(propertyPath, "%" + value + "%"));
+
+        List<T> entities = session.createQuery(query).getResultList();
+        session.close();
+        return entities;
+    }
+
+    /**
+     * Get entities by property value and entered value
+     * @param propertyName property name of entity
+     * @param value search value
+     * @return list of searched entities
+     */
+    public List<T> getByPropertyEqual(String propertyName, String value) {
+        Session session = getSession();
+
+        logger.debug("Searching for user with {} = {}",  propertyName, value);
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> query = builder.createQuery(type);
+        Root<T> root = query.from(type);
+        Expression<String> propertyPath = root.get(propertyName);
+
+        query.where(builder.like(propertyPath, value));
 
         List<T> entities = session.createQuery(query).getResultList();
         session.close();

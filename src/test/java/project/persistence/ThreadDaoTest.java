@@ -52,6 +52,17 @@ class ThreadDaoTest {
     }
 
     /**
+     * verifies get all threads based on property name and entered value
+     */
+    @Test
+    void getByPropertyEqualSuccess() {
+        List<Thread> expectedThreads = genericDaoThread.getAllEntities();
+        List<Thread> actualThreads = genericDaoThread.getByPropertyEqual("threadTitle","Omnimon is the best");
+        assertEquals(1, actualThreads.size());
+        assertNotEquals(expectedThreads, actualThreads);
+    }
+
+    /**
      * verifies get id of thread
      */
     @Test

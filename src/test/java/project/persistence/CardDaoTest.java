@@ -46,6 +46,17 @@ class CardDaoTest {
     }
 
     /**
+     * verifies get all cards based on property name and entered value
+     */
+    @Test
+    void getByPropertyEqualSuccess() {
+        List<Card> expectedCards = genericDaoCard.getAllEntities();
+        List<Card> actualCards = genericDaoCard.getByPropertyEqual("cardName","Omnimon");
+        assertEquals(1, actualCards.size());
+        assertNotEquals(expectedCards, actualCards);
+    }
+
+    /**
      * verifies get id of card
      */
     @Test

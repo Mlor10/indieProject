@@ -50,6 +50,17 @@ class ReplyDaoTest {
     }
 
     /**
+     * verifies get all replies based on property name and entered value
+     */
+    @Test
+    void getByPropertyEqualSuccess() {
+        List<Reply> expectedReplies = genericDaoReply.getAllEntities();
+        List<Reply> actualThreads = genericDaoReply.getByPropertyEqual("replyTitle","I agree");
+        assertEquals(1, actualThreads.size());
+        assertNotEquals(expectedReplies, actualThreads);
+    }
+
+    /**
      * verifies get id of reply
      */
     @Test
