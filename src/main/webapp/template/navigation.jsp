@@ -14,6 +14,9 @@
                     <li class="nav-item"><a class="nav-link" href="logIn">Sign Up/In</a></li>
                 </c:if>
                 <c:if test="${not empty userName}">
+                    <li class="nav-item"><a class="nav-link" href="profile">Profile</a></li>
+                </c:if>
+                <c:if test="${not empty userName}">
                     <li class="nav-item"><a class="nav-link" href="logOut">Log Out</a></li>
                 </c:if>
             </ul>
