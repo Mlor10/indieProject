@@ -1,14 +1,14 @@
-<%@ include file="../template/taglib.jsp" %>
-<c:import url="../template/head.jsp" />
+<%@ include file="template/taglib.jsp" %>
+<c:import url="template/head.jsp" />
 <html>
 <body>
 <div class="container">
     <div class="row">
-        <c:import url="../template/header.jsp" />
+        <c:import url="template/header.jsp" />
     </div>
 
     <div class="row">
-        <c:import url="../template/navigation.jsp" />
+        <c:import url="template/navigation.jsp" />
     </div>
         <h3 class="text-center">User Profile</h3>
         <table class="table table-hover">
@@ -35,6 +35,6 @@
         </table>
 </div>
 
-<c:import url="../template/bs-js.jsp" />
+<c:import url="template/bs-js.jsp" />
 </body>
 </html>

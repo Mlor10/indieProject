@@ -143,16 +143,6 @@
       <artifactId>jackson-databind</artifactId>
       <version>${jackson-version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.containers</groupId>
-      <artifactId>jersey-container-servlet</artifactId>
-      <version>${jersey-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.ext</groupId>
-      <artifactId>jersey-mvc-jsp</artifactId>
-      <version>${jersey-version}</version>
-    </dependency>
   </dependencies>
   <build>
     <finalName>YourIndieProject</finalName>

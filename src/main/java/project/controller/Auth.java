@@ -58,8 +58,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
     String POOL_ID;
     Keys jwks;
     GenericDao genericDaoUser;
-
-    private final Logger logger = LogManager.getLogger(this.getClass());
+    Logger logger = LogManager.getLogger(this.getClass());
 
     @Override
     public void init() throws ServletException {
