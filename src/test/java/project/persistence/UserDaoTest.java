@@ -106,7 +106,7 @@ class UserDaoTest {
     @Test
     void insertSuccess() {
         List<User> usersAfter;
-        User userToInsert = new User(null, null, "matt7", "m7@madisoncollege.edu", null);
+        User userToInsert = new User(null, null, "matt7", "m7@madisoncollege.edu", null, null);
         logger.info(userToInsert.getId());
 
         genericDaoUser.insert(userToInsert);
@@ -123,7 +123,7 @@ class UserDaoTest {
     void insertWithCardSuccess() {
         List<User> usersAfter;
         List<Card> cardsAfter;
-        User userToInsert = new User(null, null, "matt7", "m7@madisoncollege.edu", null);
+        User userToInsert = new User(null, null, "matt7", "m7@madisoncollege.edu", null, null);
         Card cardToInsert = new Card("Beelzemon", "example description", 7.99, userToInsert);
         genericDaoUser.insert(userToInsert);
         genericDaoCard.insert(cardToInsert);

@@ -32,6 +32,7 @@
     <commons-io-version>2.11.0</commons-io-version>
     <jersey-version>2.29.1</jersey-version>
     <jackson-version>2.10.0</jackson-version>
+    <restassured-version>5.0.1</restassured-version>
   </properties>
 
   <dependencies>
@@ -142,6 +143,12 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>${jackson-version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${restassured-version}</version>
     </dependency>
   </dependencies>
   <build>

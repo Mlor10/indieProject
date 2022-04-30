@@ -28,6 +28,8 @@ public class User {
     private int id;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+    @Column(name = "user_image")
+    private String userImage;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
@@ -51,13 +53,15 @@ public class User {
      * @param userName user username
      * @param userEmail user email
      * @param dateOfBirth user date of birth
+     * @param userImage user image location/url
      */
-    public User(String firstName, String lastName, String userName, String userEmail, LocalDate dateOfBirth) {
+    public User(String firstName, String lastName, String userName, String userEmail, LocalDate dateOfBirth, String userImage) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.userEmail = userEmail;
         this.dateOfBirth = dateOfBirth;
+        this.userImage = userImage;
     }
 
     /**
@@ -164,6 +168,24 @@ public class User {
      */
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    /**
+     * Gets user image
+     *
+     * @return the user image
+     */
+    public String getUserImage() {
+        return userImage;
+    }
+
+    /**
+     * Sets user image
+     *
+     * @param userImage the user image
+     */
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     /**

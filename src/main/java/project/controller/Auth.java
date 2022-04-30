@@ -280,7 +280,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      */
     private void insertUserToDatabase(String userName, String userEmail) {
         try {
-            User newUser = new User(null, null, userName, userEmail, null);
+            User newUser = new User(null, null, userName, userEmail, null, null);
             genericDaoUser.insert(newUser);
             logger.info(userName + " added to database. Continuing to home page.");
         } catch (Exception e) {
