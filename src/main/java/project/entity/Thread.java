@@ -20,8 +20,6 @@ public class Thread {
     private String threadContent;
     @Column(name = "thread_views")
     private int threadViews;
-    @Column(name = "thread_replies")
-    private int threadReplies;
     @Column(name = "thread_date")
     private LocalDate threadDate;
     @Id
@@ -46,14 +44,12 @@ public class Thread {
      * @param threadTitle thread title
      * @param threadContent thread content
      * @param threadViews thread views
-     * @param threadReplies thread replies
      * @param user thread's user
      */
-    public Thread(String threadTitle, String threadContent, int threadViews, int threadReplies, LocalDate threadDate, User user) {
+    public Thread(String threadTitle, String threadContent, int threadViews, LocalDate threadDate, User user) {
         this.threadTitle = threadTitle;
         this.threadContent = threadContent;
         this.threadViews = threadViews;
-        this.threadReplies = threadReplies;
         this.threadDate = threadDate;
         this.user = user;
     }
@@ -110,24 +106,6 @@ public class Thread {
      */
     public void setThreadViews(int threadViews) {
         this.threadViews = threadViews;
-    }
-
-    /**
-     * Gets thread replies
-     *
-     * @return
-     */
-    public int getThreadReplies() {
-        return threadReplies;
-    }
-
-    /**
-     * Sets thread replies
-     *
-     * @param threadReplies thread replies
-     */
-    public void setThreadReplies(int threadReplies) {
-        this.threadReplies = threadReplies;
     }
 
     /**
@@ -228,7 +206,6 @@ public class Thread {
                 "threadTitle='" + threadTitle + '\'' +
                 ", threadContent='" + threadContent + '\'' +
                 ", threadViews=" + threadViews +
-                ", threadReplies=" + threadReplies +
                 ", threadDate=" + threadDate +
                 ", id=" + id +
                 ", user=" + user +
@@ -241,7 +218,6 @@ public class Thread {
         if (o == null || getClass() != o.getClass()) return false;
         Thread thread = (Thread) o;
         return threadViews == thread.threadViews
-                && threadReplies == thread.threadReplies
                 && id == thread.id
                 && threadTitle.equals(thread.threadTitle)
                 && threadContent.equals(thread.threadContent)
@@ -251,6 +227,6 @@ public class Thread {
 
     @Override
     public int hashCode() {
-        return Objects.hash(threadTitle, threadContent, threadViews, threadReplies, threadDate, id, user);
+        return Objects.hash(threadTitle, threadContent, threadViews, threadDate, id, user);
     }
 }

@@ -1,7 +1,7 @@
 <%@ include file="../../taglib.jsp" %>
 <th>Last Name</th>
-<th>${userProfile.lastName}</th>
-<th>
+<td>${userProfile.lastName}</td>
+<td>
     <c:if test="${(not empty userName) and (userName == userProfile.userName)}">
         <div class="row">
             <div class="col-auto">
@@ -27,4 +27,4 @@
             </div>
         </div>
     </c:if>
-</th>
+</td>

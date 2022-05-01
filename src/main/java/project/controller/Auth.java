@@ -268,6 +268,8 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         // checks the searched username if there were any before inserting into the database
         if (searchUser.isEmpty()) {
             insertUserToDatabase(userName, userEmail);
+            List<User> newSearchUser = genericDaoUser.getByPropertyEqual("userName", userName);
+            userSession.setAttribute("userId", newSearchUser.get(0).getId());
         } else {
             // sets the user's id so the process is easier to crud
             userSession.setAttribute("userId", searchUser.get(0).getId());

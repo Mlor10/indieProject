@@ -1,10 +1,10 @@
 <%@ include file="../../taglib.jsp" %>
 <th>Date of Birth</th>
-<th>
+<td>
     <fmt:parseDate type="date" pattern="yyyy-MM-dd" var="dateOfBirthParsed" value="${userProfile.dateOfBirth}"/>
     <fmt:formatDate pattern="MM-dd-yyyy" value="${dateOfBirthParsed}" />
-</th>
-<th>
+</td>
+<td>
     <c:if test="${(not empty userName) and (userName == userProfile.userName)}">
         <div class="row">
             <div class="col-auto">
@@ -30,4 +30,4 @@
             </div>
         </div>
     </c:if>
-</th>
+</td>

@@ -109,7 +109,7 @@ class ThreadDaoTest {
         List<Thread> threadsAfter;
         List<User> retrievedUsers = genericDaoUser.getAllEntities();
         User retrievedUser = retrievedUsers.get(5);
-        Thread threadToInsert = new Thread("X-Antibody is a sleeper build", "example description", 0, 0, LocalDate.now(), retrievedUser);
+        Thread threadToInsert = new Thread("X-Antibody is a sleeper build", "example description", 0, LocalDate.now(), retrievedUser);
 
         genericDaoThread.insert(threadToInsert);
         threadsAfter = genericDaoThread.getAllEntities();

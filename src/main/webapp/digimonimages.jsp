@@ -15,38 +15,44 @@
     <div class="row">
         <c:import url="template/navigation.jsp" />
     </div>
-    <h3 class="text-center pt-3">Select an image for your profile</h3>
-    <c:if test="${not empty digimons}">
-        <table class="searchTable display table table-hover mt-3">
-            <thead>
-                <th class="text-center">Digimon Images</th>
-            </thead>
-            <tbody>
-            <c:forEach var="digimon" items="${digimons}">
-                <tr>
-                    <th class=row">
-                        <div class="col">
-                            <img src="${digimon.img}" alt="${digimon.name} image">
-                        </div>
-                        <div class="col">
-                            <div class="row">
-                                <h2 class="col">${digimon.name}</h2>
-                                <form class="col" action="update" method="GET">
-                                    <input type="hidden" name="updateObject" value="user">
-                                    <input type="hidden" name="updateType" value="profileImage">
-                                    <input type="hidden" name="updateValue" value="${digimon.img}">
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary mb-2">Select Image</button>
-                                    </div>
-                                </form>
+
+    <div class="row">
+        <h3 class="text-center pt-3">Select an image for your profile</h3>
+        <c:if test="${not empty digimons}">
+            <table class="searchTable display table table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Digimon Images</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="digimon" items="${digimons}">
+                    <tr>
+                        <td class=row">
+                            <div class="col">
+                                <img src="${digimon.img}" alt="${digimon.name} image" style="height: 160px" class="img-fluid">
                             </div>
-                        </div>
-                    </th>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </c:if>
+                            <div class="col">
+                                <div class="row">
+                                    <h3 class="col-3">${digimon.name}</h3>
+                                    <form class="col-3" action="update" method="GET">
+                                        <input type="hidden" name="updateObject" value="user">
+                                        <input type="hidden" name="updateType" value="profileImage">
+                                        <input type="hidden" name="updateValue" value="${digimon.img}">
+                                        <div class="col-auto">
+                                            <button type="submit" class="btn btn-primary mb-2">Select Image</button>
+                                        </div>
+                                    </form>
+                                    <div class="col-6"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+    </div>
 </div>
 
 <c:import url="template/bs-js.jsp" />
