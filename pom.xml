@@ -10,8 +10,7 @@
   <packaging>war</packaging>
 
   <name>indieProject Maven Webapp</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://indieproject-env.eba-iu4yftnp.us-east-2.elasticbeanstalk.com/</url>
 
   <properties>
     <maven.compiler.release>11</maven.compiler.release>
@@ -30,6 +29,7 @@
     <java-jwt-version>3.4.1</java-jwt-version>
     <json-version>20170516</json-version>
     <commons-io-version>2.11.0</commons-io-version>
+    <maven-war-plugin-version>3.2.2</maven-war-plugin-version>
     <jersey-version>2.29.1</jersey-version>
     <jackson-version>2.10.0</jackson-version>
     <restassured-version>5.0.1</restassured-version>
@@ -173,7 +173,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
+          <version>${maven-war-plugin-version}</version>
           <configuration>
             <webResources>
               <resource>

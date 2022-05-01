@@ -10,29 +10,31 @@
     <div class="row">
         <c:import url="template/navigation.jsp" />
     </div>
-        <h3 class="text-center">User Profile</h3>
-        <table class="table table-hover">
-            <tr>
-                <th>Username</th>
-                <th>${userProfile.userName}</th>
-            </tr>
-            <tr>
-                <th>First Name</th>
-                <th>${userProfile.firstName}</th>
-            </tr>
-            <tr>
-                <th>Last Name</th>
-                <th>${userProfile.lastName}</th>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <th>${userProfile.userEmail}</th>
-            </tr>
-            <tr>
-                <th>Date of Birth</th>
-                <th>${userProfile.dateOfBirth}</th>
-            </tr>
-        </table>
+        <h3 class="text-center mt-3">User Profile</h3>
+    <div class="row align-items-center border border-dark">
+        <div class="col-3">
+            <c:import url="template/components/userprofile/userprofile-image.jsp" />
+        </div>
+        <div class="col-9">
+            <table class="table table-hover">
+                <tr>
+                    <c:import url="template/components/userprofile/userprofile-username.jsp" />
+                </tr>
+                <tr>
+                    <c:import url="template/components/userprofile/userprofile-firstname.jsp" />
+                </tr>
+                <tr>
+                    <c:import url="template/components/userprofile/userprofile-lastname.jsp" />
+                </tr>
+                <tr>
+                    <c:import url="template/components/userprofile/userprofile-email.jsp" />
+                </tr>
+                <tr>
+                    <c:import url="template/components/userprofile/userprofile-dateofbirth.jsp" />
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 <c:import url="template/bs-js.jsp" />

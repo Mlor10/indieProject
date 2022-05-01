@@ -17,10 +17,10 @@ import java.io.IOException;
  */
 
 @WebServlet(
-        urlPatterns = {"/searchEntity"}
+        urlPatterns = {"/search"}
 )
 
-public class SearchEntity extends HttpServlet {
+public class Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // grabs the search term from the form

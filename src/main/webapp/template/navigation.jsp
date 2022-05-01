@@ -14,7 +14,7 @@
                     <li class="nav-item"><a class="nav-link" href="logIn">Sign Up/In</a></li>
                 </c:if>
                 <c:if test="${not empty userName}">
-                    <li class="nav-item"><a class="nav-link" href="loadprofile?userName=${userName}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile?userName=${userName}">Profile</a></li>
                 </c:if>
                 <c:if test="${not empty userName}">
                     <li class="nav-item"><a class="nav-link" href="logOut">Log Out</a></li>
@@ -22,7 +22,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li>
-                <form class="d-flex" action="searchEntity" method="GET">
+                <form class="d-flex" action="search" method="GET">
                     <input class="form-control me-2" type="text" placeholder="Search..." id="searchTerm" name="searchTerm">
                     <button class="btn btn-light" type="submit">Search</button>
                 </form>

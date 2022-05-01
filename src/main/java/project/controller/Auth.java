@@ -269,6 +269,8 @@ public class Auth extends HttpServlet implements PropertiesLoader {
         if (searchUser.isEmpty()) {
             insertUserToDatabase(userName, userEmail);
         } else {
+            // sets the user's id so the process is easier to crud
+            userSession.setAttribute("userId", searchUser.get(0).getId());
             logger.info(userName + " already exists in the database. Continuing to home page.");
         }
     }

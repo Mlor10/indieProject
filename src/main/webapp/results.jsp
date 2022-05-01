@@ -26,7 +26,7 @@
                 <tbody>
                 <c:forEach var="user" items="${users}">
                     <tr>
-                        <th><a class="nav-link" href="loadprofile?userName=${user.userName}">${user.userName}</a></th>
+                        <th><a class="nav-link" href="profile?userName=${user.userName}">${user.userName}</a></th>
                     </tr>
                 </c:forEach>
                 </tbody>

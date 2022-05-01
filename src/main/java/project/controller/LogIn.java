@@ -1,8 +1,6 @@
 package project.controller;
 
 import project.utilities.PropertiesLoader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,7 +20,6 @@ import java.util.Properties;
  */
 public class LogIn extends HttpServlet implements PropertiesLoader {
     Properties properties;
-    private final Logger logger = LogManager.getLogger(this.getClass());
     public static String CLIENT_ID;
     public static String LOGIN_URL;
     public static String REDIRECT_URL;
