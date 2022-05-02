@@ -4,14 +4,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import project.entity.Card;
 import project.entity.Reply;
 import project.entity.Thread;
 import project.entity.User;
-import project.entity.Reply;
 import project.test.util.Database;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -109,7 +108,7 @@ class ThreadDaoTest {
         List<Thread> threadsAfter;
         List<User> retrievedUsers = genericDaoUser.getAllEntities();
         User retrievedUser = retrievedUsers.get(5);
-        Thread threadToInsert = new Thread("X-Antibody is a sleeper build", "example description", 0, LocalDate.now(), retrievedUser);
+        Thread threadToInsert = new Thread("X-Antibody is a sleeper build", "example description", 0, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), retrievedUser);
 
         genericDaoThread.insert(threadToInsert);
         threadsAfter = genericDaoThread.getAllEntities();
@@ -137,5 +136,14 @@ class ThreadDaoTest {
 
         assertNotEquals(threadsBefore, actualThreads);
         assertNotEquals(repliesBefore, actualReplies);
+    }
+
+    /**
+     * test sort reply method to see if it actually sorts reply date
+     */
+    @Test
+    void sortReplySuccess() {
+        Thread retrievedThread = (Thread)genericDaoThread.getById(1);
+        logger.info(retrievedThread.sortReply(retrievedThread.getReplies()));
     }
 }

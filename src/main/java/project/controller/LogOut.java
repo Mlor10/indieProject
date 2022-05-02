@@ -48,12 +48,14 @@ public class LogOut extends HttpServlet implements PropertiesLoader {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession userSession = req.getSession();
-        String url = "";
-        if (this.properties != null && LOGOUT_URL != null && CLIENT_ID != null && SIGNOUT_URL != null) {
-            url = LOGOUT_URL + "?client_id=" + CLIENT_ID + "&logout_uri=" + SIGNOUT_URL;
-            userSession.invalidate();
-        } else {
-            url = "error";
+        String url = "/error";
+        if (userSession.getAttribute("userName") != null) {
+            if (this.properties != null && LOGOUT_URL != null && CLIENT_ID != null && SIGNOUT_URL != null) {
+                url = LOGOUT_URL + "?client_id=" + CLIENT_ID + "&logout_uri=" + SIGNOUT_URL;
+                userSession.invalidate();
+            } else {
+                url = "/error";
+            }
         }
         resp.sendRedirect(url);
     }

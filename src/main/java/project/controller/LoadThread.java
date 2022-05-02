@@ -1,7 +1,7 @@
 package project.controller;
 
-import project.entity.User;
 import project.persistence.GenericDao;
+import project.entity.Thread;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Servlet that loads the user profile and forwards to the userprofile page
  */
 @WebServlet(
-        urlPatterns = {"/profile"}
+        urlPatterns = {"/thread"}
 )
-public class LoadProfile extends HttpServlet {
+public class LoadThread extends HttpServlet {
 
     /**
      * Handles HTTP GET requests
@@ -28,15 +27,19 @@ public class LoadProfile extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GenericDao genericDaoUser = new GenericDao(User.class);
-        String userName = req.getParameter("userName");
+        GenericDao genericDaoThread = new GenericDao(Thread.class);
+        int threadId = Integer.parseInt(req.getParameter("threadId"));
         String url;
-        List<User> searchUser = genericDaoUser.getByPropertyEqual("userName", userName);
-        // checks the searched username if there are any before inserting into the database
-        if (!searchUser.isEmpty()) {
-            User userProfile = searchUser.get(0);
-            req.setAttribute("userProfile", userProfile);
-            url = "userprofile.jsp";
+        Thread currentThread = (Thread)genericDaoThread.getById(threadId);
+
+        // increases thread view by one while loading the page
+        currentThread.setThreadViews(currentThread.getThreadViews() + 1);
+        genericDaoThread.saveOrUpdate(currentThread);
+
+        // checks the searched thread if there are any before inserting into the database
+        if (currentThread != null) {
+            req.setAttribute("currentThread", currentThread);
+            url = "userthread.jsp";
         } else {
             url = "error.jsp";
         }

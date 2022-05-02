@@ -3,7 +3,8 @@ package project.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 /**
@@ -11,13 +12,13 @@ import java.util.Objects;
  */
 @Entity(name = "Reply")
 @Table(name = "reply")
-public class Reply {
+public class Reply implements Comparable<Reply>{
     @Column(name = "reply_title")
     private String replyTitle;
     @Column(name = "reply_content")
     private String replyContent;
     @Column(name = "reply_date")
-    private LocalDate replyDate;
+    private LocalDateTime replyDate;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
     @GenericGenerator(name = "native",strategy = "native")
@@ -43,7 +44,7 @@ public class Reply {
      * @param thread reply's thread
      * @param user reply's user
      */
-    public Reply(String replyTitle, String replyContent, LocalDate replyDate, Thread thread, User user) {
+    public Reply(String replyTitle, String replyContent, LocalDateTime replyDate, Thread thread, User user) {
         this.replyTitle = replyTitle;
         this.replyContent = replyContent;
         this.replyDate = replyDate;
@@ -92,8 +93,8 @@ public class Reply {
      *
      * @return the reply date
      */
-    public LocalDate getReplyDate() {
-        return replyDate;
+    public LocalDateTime getReplyDate() {
+        return formatDateTime(this.replyDate);
     }
 
     /**
@@ -101,8 +102,8 @@ public class Reply {
      *
      * @param replyDate the reply date
      */
-    public void setReplyDate(LocalDate replyDate) {
-        this.replyDate = replyDate;
+    public void setReplyDate(LocalDateTime replyDate) {
+        this.replyDate = formatDateTime(replyDate);
     }
 
     /**
@@ -159,6 +160,15 @@ public class Reply {
         this.user = user;
     }
 
+    /**
+     * Formats the localdatetime by removing anything less than seconds such as milliseconds
+     * @param replyDate reply date to format
+     * @return formatted reply date
+     */
+    public LocalDateTime formatDateTime(LocalDateTime replyDate) {
+        return replyDate.truncatedTo(ChronoUnit.SECONDS);
+    }
+
     @Override
     public String toString() {
         return "Reply{" +
@@ -176,16 +186,19 @@ public class Reply {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reply reply = (Reply) o;
-        return id == reply.id
-                && replyTitle.equals(reply.replyTitle)
-                && replyContent.equals(reply.replyContent)
-                && replyDate.equals(reply.replyDate)
-                && thread.equals(reply.thread)
-                && user.equals(reply.user);
+        return id == reply.id && replyTitle.equals(reply.replyTitle) && replyContent.equals(reply.replyContent) && replyDate.equals(reply.replyDate) && thread.equals(reply.thread) && user.equals(reply.user);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(replyTitle, replyContent, replyDate, id, thread, user);
+    }
+
+    @Override
+    public int compareTo(Reply reply) {
+        if (getReplyDate() == null || reply.getReplyDate() == null) {
+            return 0;
+        }
+        return getReplyDate().compareTo(reply.getReplyDate());
     }
 }

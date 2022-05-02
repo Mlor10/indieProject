@@ -9,7 +9,8 @@ import project.entity.Thread;
 import project.entity.User;
 import project.test.util.Database;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -109,7 +110,7 @@ class ReplyDaoTest {
         List<Thread> retrievedThreads = genericDaoThread.getAllEntities();
         Thread retrievedThread = retrievedThreads.get(4);
         User retrievedUser = retrievedUsers.get(5);
-        Reply replyToInsert = new Reply("Amazing deck guide", "example content", LocalDate.now(), retrievedThread, retrievedUser);
+        Reply replyToInsert = new Reply("Amazing deck guide", "example content", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), retrievedThread, retrievedUser);
 
         genericDaoReply.insert(replyToInsert);
         repliesAfter = genericDaoReply.getAllEntities();

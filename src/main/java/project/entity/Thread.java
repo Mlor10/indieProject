@@ -3,10 +3,9 @@ package project.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 /**
  * A class to represent a thread
@@ -21,7 +20,7 @@ public class Thread {
     @Column(name = "thread_views")
     private int threadViews;
     @Column(name = "thread_date")
-    private LocalDate threadDate;
+    private LocalDateTime threadDate;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
     @GenericGenerator(name = "native",strategy = "native")
@@ -46,7 +45,7 @@ public class Thread {
      * @param threadViews thread views
      * @param user thread's user
      */
-    public Thread(String threadTitle, String threadContent, int threadViews, LocalDate threadDate, User user) {
+    public Thread(String threadTitle, String threadContent, int threadViews, LocalDateTime threadDate, User user) {
         this.threadTitle = threadTitle;
         this.threadContent = threadContent;
         this.threadViews = threadViews;
@@ -113,8 +112,8 @@ public class Thread {
      *
      * @return thread date
      */
-    public LocalDate getThreadDate() {
-        return threadDate;
+    public LocalDateTime getThreadDate() {
+        return formatDateTime(this.threadDate);
     }
 
     /**
@@ -122,8 +121,8 @@ public class Thread {
      *
      * @param threadDate thread date
      */
-    public void setThreadDate(LocalDate threadDate) {
-        this.threadDate = threadDate;
+    public void setThreadDate(LocalDateTime threadDate) {
+        this.threadDate = formatDateTime(threadDate);
     }
 
     /**
@@ -200,6 +199,26 @@ public class Thread {
         reply.setThread(null);
     }
 
+    /**
+     * Formats the localdatetime by removing anything less than seconds such as milliseconds
+     * @param threadDate thread date to format
+     * @return formatted thread date
+     */
+    public LocalDateTime formatDateTime(LocalDateTime threadDate) {
+        return threadDate.truncatedTo(ChronoUnit.SECONDS);
+    }
+
+    /**
+     * Sorts list and returns it
+     * @param replies thread replies
+     * @return sorted replies by reply date
+     */
+    public List<Reply> sortReply(Set<Reply> replies) {
+        List<Reply> replyList = new ArrayList<>(replies);
+        Collections.sort(replyList);
+        return replyList;
+    }
+
     @Override
     public String toString() {
         return "Thread{" +
@@ -217,12 +236,7 @@ public class Thread {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Thread thread = (Thread) o;
-        return threadViews == thread.threadViews
-                && id == thread.id
-                && threadTitle.equals(thread.threadTitle)
-                && threadContent.equals(thread.threadContent)
-                && threadDate.equals(thread.threadDate)
-                && user.equals(thread.user);
+        return threadViews == thread.threadViews && id == thread.id && threadTitle.equals(thread.threadTitle) && threadContent.equals(thread.threadContent) && threadDate.equals(thread.threadDate) && user.equals(thread.user);
     }
 
     @Override

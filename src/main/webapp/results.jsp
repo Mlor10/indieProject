@@ -16,7 +16,7 @@
         </div>
         <div class="row">
             <c:if test="${(empty users) and (empty cards) and (empty threads)}">
-                <h3 class="text-center pt-3">No Results Found</h3>
+                <h3 class="text-center mt-3">No Results Found</h3>
             </c:if>
             <c:if test="${not empty users}">
                 <h3>Users</h3>
@@ -40,7 +40,7 @@
                                         </c:if>
                                     </div>
                                     <div class="col-auto">
-                                        <a class="nav-link" href="profile?userName=${user.userName}">${user.userName}</a>
+                                        <a class="text-decoration-none" href="profile?userName=${user.userName}">${user.userName}</a>
                                     </div>
                                 </div>
                             </td>
@@ -66,7 +66,7 @@
                             <td>${card.cardName}</td>
                             <td>${card.cardDescription}</td>
                             <td>${card.cardPrice}</td>
-                            <td><a class="nav-link" href="profile?userName=${card.user.userName}">${card.user.userName}</a></td>
+                            <td><a class="text-decoration-none" href="profile?userName=${card.user.userName}">${card.user.userName}</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -90,8 +90,11 @@
                             <td>${thread.threadTitle}</td>
                             <td>${thread.replies.size()}</td>
                             <td>${thread.threadViews}</td>
-                            <td>${thread.threadDate}</td>
-                            <td><a class="nav-link" href="profile?userName=${thread.user.userName}">${thread.user.userName}</a></td>
+                            <td>
+                                <fmt:parseDate value="${thread.threadDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedThreadDate" type="both" />
+                                <fmt:formatDate pattern="MM.dd.yyyy HH:mm" value="${parsedThreadDate}" />
+                            </td>
+                            <td><a class="text-decoration-none" href="profile?userName=${thread.user.userName}">${thread.user.userName}</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

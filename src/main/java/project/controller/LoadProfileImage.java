@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -29,17 +30,21 @@ public class LoadProfileImage extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext servletContext = getServletContext();
-        GenericDao genericDaoResponse = new GenericDao(Digimon.class);
-        Properties apiPathProperties = (Properties)servletContext.getAttribute("apiPathProperties");
-        String apiURL = apiPathProperties.getProperty("digimon.image.url.path");
-        String param = "";
-        String paramValue = "";
+        HttpSession userSession = req.getSession();
+        String url = "/error";
+        if (userSession.getAttribute("userName") != null) {
+            ServletContext servletContext = getServletContext();
+            GenericDao genericDaoResponse = new GenericDao(Digimon.class);
+            Properties apiPathProperties = (Properties) servletContext.getAttribute("apiPathProperties");
+            String apiURL = apiPathProperties.getProperty("digimon.image.url.path");
+            String param = "";
+            String paramValue = "";
 
-        List<Digimon> retrievedDigimons = genericDaoResponse.getResponseWithParam(apiURL, param, paramValue);
-        req.setAttribute("digimons", retrievedDigimons);
+            List<Digimon> retrievedDigimons = genericDaoResponse.getResponseWithParam(apiURL, param, paramValue);
+            req.setAttribute("digimons", retrievedDigimons);
 
-        String url = "digimonimages.jsp";
+            url = "digimonimages.jsp";
+        }
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
         dispatcher.forward(req, resp);
     }

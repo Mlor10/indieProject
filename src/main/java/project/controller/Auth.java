@@ -271,7 +271,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             List<User> newSearchUser = genericDaoUser.getByPropertyEqual("userName", userName);
             userSession.setAttribute("userId", newSearchUser.get(0).getId());
         } else {
-            // sets the user's id so the process is easier to crud
+            // sets the user's id so the crud process is easier
             userSession.setAttribute("userId", searchUser.get(0).getId());
             logger.info(userName + " already exists in the database. Continuing to home page.");
         }

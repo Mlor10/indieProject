@@ -10,12 +10,11 @@
     <div class="row">
         <c:import url="template/navigation.jsp" />
     </div>
-    <c:if test="${userName == null}">
-        <h2 class="text-center">Logout Page</h2>
-    </c:if>
-    <c:if test="${userName != null}">
-        <h2 class="text-center">${userName} have logged out successfully</h2>
-    </c:if>
+    <div class="row">
+        <c:if test="${userName == null}">
+            <h2 class="text-center">You have logged out successfully</h2>
+        </c:if>
+    </div>
 </div>
 
 <c:import url="template/bs-js.jsp" />

@@ -35,7 +35,7 @@
                             <div class="col">
                                 <div class="row">
                                     <h3 class="col-3">${digimon.name}</h3>
-                                    <form class="col-3" action="update" method="GET">
+                                    <form class="col-3" action="update" method="POST">
                                         <input type="hidden" name="updateObject" value="user">
                                         <input type="hidden" name="updateType" value="profileImage">
                                         <input type="hidden" name="updateValue" value="${digimon.img}">

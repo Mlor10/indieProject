@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="collapse" id="lastNameCollapse">
                     <div class="card card-body">
-                        <form class="row form-inline" action="update" method="GET">
+                        <form class="row form-inline" action="update" method="POST">
                             <input type="hidden" name="updateObject" value="user">
                             <input type="hidden" name="updateType" value="lastName">
                             <div class="col-auto">

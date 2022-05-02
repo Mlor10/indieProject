@@ -40,7 +40,7 @@ public class Search extends HttpServlet {
             req.setAttribute("threads", threadDao.getAllEntities());
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/results.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("results.jsp");
         dispatcher.forward(req, resp);
     }
 }

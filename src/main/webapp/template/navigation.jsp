@@ -8,7 +8,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarsToggle">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="<c:url value="/" />">Cards</a></li>
+                <li class="nav-item"><a class="nav-link" href="<c:url value="/cards" />">Cards</a></li>
                 <li class="nav-item"><a class="nav-link" href="<c:url value="/threads" />">Threads</a></li>
                 <c:if test="${empty userName}">
                     <li class="nav-item"><a class="nav-link" href="logIn">Sign Up/In</a></li>

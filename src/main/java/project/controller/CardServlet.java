@@ -1,6 +1,6 @@
 package project.controller;
 
-import project.entity.Thread;
+import project.entity.Card;
 import project.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet that forwards to the thread page
+ * Servlet that forwards to the card page
  */
 @WebServlet(
-        urlPatterns = {"/threads"}
+        urlPatterns = {"/cards"}
 )
-public class ThreadServlet extends HttpServlet {
+public class CardServlet extends HttpServlet {
     /**
      * Handles HTTP GET requests
      * @param req servlet request
@@ -26,9 +26,9 @@ public class ThreadServlet extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GenericDao threadDao = new GenericDao(Thread.class);
-        req.setAttribute("threads", threadDao.getAllEntities());
-        String url = "thread.jsp";
+        GenericDao cardDao = new GenericDao(Card.class);
+        req.setAttribute("cards", cardDao.getAllEntities());
+        String url = "card.jsp";
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
         dispatcher.forward(req, resp);
     }
