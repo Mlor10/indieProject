@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <c:forEach var="currentThreadReply" items="${currentThread.replies}">
+    <c:forEach var="currentThreadReply" items="${currentThread.sortReply(currentThread.replies)}">
         <div class="row d-flex border border-dark">
             <div class="col-2">
                 <div class="row py-2 text-center bg-dark text-white">
