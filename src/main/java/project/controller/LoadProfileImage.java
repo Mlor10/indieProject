@@ -31,7 +31,7 @@ public class LoadProfileImage extends HttpServlet {
      */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession userSession = req.getSession();
-        String url = "/error";
+        String url = "error";
         if (userSession.getAttribute("userName") != null) {
             ServletContext servletContext = getServletContext();
             GenericDao genericDaoResponse = new GenericDao(Digimon.class);

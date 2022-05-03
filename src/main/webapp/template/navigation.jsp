@@ -17,7 +17,7 @@
                     <li class="nav-item"><a class="nav-link" href="profile?userName=${userName}">Profile</a></li>
                 </c:if>
                 <c:if test="${not empty userName}">
-                    <li class="nav-item"><a class="nav-link" href="logOut">Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout">Log Out</a></li>
                 </c:if>
             </ul>
             <ul class="navbar-nav ms-auto">

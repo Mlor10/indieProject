@@ -56,3 +56,6 @@ fabric.properties
 https-instance.config
 https-instance-single.config
 ssl.conf
+
+# Memory Swap Config AWS
+01_setup_swap.config

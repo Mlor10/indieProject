@@ -37,7 +37,7 @@
                         <td>${card.cardName}</td>
                         <td>${card.cardDescription}</td>
                         <td>${card.cardPrice}</td>
-                        <td><a href="profile?userName=${card.user.userName}">${card.user.userName}</a></td>
+                        <td><a class="text-decoration-none" href="profile?userName=${card.user.userName}">${card.user.userName}</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
