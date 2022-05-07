@@ -34,6 +34,7 @@ public class Create extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession userSession = req.getSession();
         String targetURL = "/error";
+        req.setAttribute("errorMessage", "ERROR: user is not logged in. Please sign in to use this feature.");
         String createObject = req.getParameter("createObject");
 
         // checks if a user is logged in before attempting to create a thread

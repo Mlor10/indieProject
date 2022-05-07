@@ -10,7 +10,12 @@
     <div class="row">
         <c:import url="template/navigation.jsp" />
     </div>
-<h1 class="text-center">ERROR</h1>
+    <c:if test="${errorMessage != null}">
+        <h1 class="text-center">${errorMessage}</h1>
+    </c:if>
+    <c:if test="${errorMessage = null}">
+        <h1 class="text-center">ERROR</h1>
+    </c:if>
 </div>
 </body>
 <c:import url="template/bs-js.jsp" />
