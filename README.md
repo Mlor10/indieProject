@@ -15,6 +15,19 @@ from the trading card game industry.
 - Unit Testing
   - JUnit tests
 - IDE: IntelliJ IDEA
+- ORM Framework
+  - Hibernate 5
+- Web Services API used
+  - [Digimon Card IO API](https://documenter.getpostman.com/view/14059948/TzecB4fH)
+  - [Digimon API](https://digimon-api.herokuapp.com/)
+- Logging
+  - Log4J
+- Hosting
+  - AWS ElasticBeanstalk
+- Auth
+  - AWS Cognito
+- CSS
+  - Bootstrap 5
 
 ### Design
 * [User Stories](DesignDocuments/UserStories.md)
