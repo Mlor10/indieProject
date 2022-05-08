@@ -91,3 +91,18 @@ N/A
 - [x] Replies Dao Test
 <!-- end of the list -->
 Added in Thread and Replies Dao. Updated db-diagram. Updated User Dao to include a test method for testing removal of attached entities.
+
+**Week 15**
+4/26/22
+- [x] Front-end implemented
+- [x] CRUD Servlets
+- [x] User actions implemented from back-end to front-end
+- [x] Servlet security checks (user logged in, the correct user, or admin permissions)
+<!-- end of the list -->
+A lot of front-end work including adding a Comparator interface to Reply to sort by localdatetime upon retrieval with a format method
+
+**Week 16**
+4/26/22
+- [x] Front-end tweaks
+<!-- end of the list -->
+Final touches before presentation on the web application and organizing user action jsp into smaller templates

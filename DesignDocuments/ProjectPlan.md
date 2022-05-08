@@ -65,34 +65,34 @@
 
 ### Week 11
 - [x] Weekly Reflection
-- [ ] Java image shrinking or expanding (so all images are the same size for profile and card listings)
+- [x] Java image shrinking or expanding (so all images are the same size for profile and card listings)
 <!-- end of the list -->
 
 ### Week 12
 - [x] Weekly Reflection
-- [ ] Sort users
-- [ ] Sort threads
+- [x] Sort users
+- [x] Sort threads
 <!-- end of the list -->
 
 ### Week 13
 - [x] Weekly Reflection
-- [ ] Search card listings
-- [ ] Search threads
+- [x] Search card listings
+- [x] Search threads
 <!-- end of the list -->
 
 ### Week 14
-- [ ] Weekly Reflection
-- [ ] Edit user profile
-- [ ] Edit user's card listing
-- [ ] Edit user's thread posts or replies
+- [x] Weekly Reflection
+- [x] Edit user profile
+- [x] Edit user's card listing
+- [x] Edit user's thread posts or replies
 <!-- end of the list -->
 
 ### Week 15
-- [ ] Weekly Reflection
-- [ ] Everything search bar (Searches through all databases except for reports for entered characters)
+- [x] Weekly Reflection
+- [x] Everything search bar (Searches through all databases except for reports for entered characters)
 <!-- end of the list -->
 
 ### Week 16
-- [ ] Weekly Reflection
-- [ ] Check for final touches
+- [x] Weekly Reflection
+- [x] Check for final touches
 <!-- end of the list -->
