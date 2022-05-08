@@ -50,6 +50,8 @@ public class Create extends HttpServlet {
 
                 Thread newThread = new Thread(threadTitle, threadContent, 0, LocalDateTime.now(Clock.systemUTC()).truncatedTo(ChronoUnit.SECONDS), (User)genericDaoUser.getById(userId));
                 genericDaoThread.insert(newThread);
+                Thread addedThread = (Thread)genericDaoThread.getAllEntities().get(genericDaoThread.getAllEntities().size() - 1);
+                targetURL = getServletContext().getContextPath() + "/thread?threadId=" + addedThread.getId();
             }
             if (createObject.equals("reply")) {
                 String replyTitle = req.getParameter("replyTitle");
@@ -71,7 +73,8 @@ public class Create extends HttpServlet {
                     newCard = new Card(cardName, null, 0, null, (User)genericDaoUser.getById(userId));
                 }
                 genericDaoCard.insert(newCard);
-                targetURL = getServletContext().getContextPath() + "/cards";
+                Card addedCard = (Card)genericDaoCard.getAllEntities().get(genericDaoCard.getAllEntities().size() - 1);
+                targetURL = getServletContext().getContextPath() + "/card?cardId=" + addedCard.getId();
             }
         }
         resp.sendRedirect(targetURL);

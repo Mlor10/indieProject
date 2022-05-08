@@ -34,6 +34,8 @@ from the trading card game industry.
 * [Screen Design](DesignDocuments/Screens.md)
 * [DB Diagram](DesignDocuments/db-diagram.png)
 
+### [WebApp Demo Video](https://youtu.be/172AsSLmSl4)
+
 ### [Project Plan](DesignDocuments/ProjectPlan.md)
 
 ### [Weekly Reflection](WeeklyReflection.md)

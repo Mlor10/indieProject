@@ -2,7 +2,7 @@
 <c:import url="template/head.jsp" />
 <script type="text/javascript" class="init">
     $(document).ready( function () {
-        $('.searchTable').DataTable();
+        $('.searchTable').DataTable({searching: false, paging: false, info: false});
     } );
 </script>
 <html>

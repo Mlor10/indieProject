@@ -3,7 +3,7 @@
 <th>Card Price</th>
 <td><fmt:formatNumber type="currency" value="${currentCard.cardPrice}" /></td>
 <td>
-    <c:if test="${(userName != null) and ((userName == card.user.userName) or adminPermission == 'true')}">
+    <c:if test="${(userName != null) and ((userName == currentCard.user.userName) or adminPermission == 'true')}">
         <div class="row">
             <div class="col-auto">
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#cardPriceCollapse">

@@ -7,6 +7,7 @@ import project.entity.Thread;
 import project.entity.User;
 import project.persistence.GenericDao;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,18 +41,17 @@ public class Delete extends HttpServlet {
             String deleteObject = req.getParameter("deleteObject");
             int deleteObjectId = Integer.parseInt(req.getParameter("deleteObjectId"));
             GenericDao genericDaoUser = new GenericDao(User.class);
+            boolean deleteUser = false;
+            User currentUser = null;
             // grabs the logged user
             List<User> loggedUser = genericDaoUser.getByPropertyEqual("userName", (String)userSession.getAttribute("userName"));
             if (deleteObject.equals("user")) {
-                User currentUser = (User) genericDaoUser.getById(deleteObjectId);
+                currentUser = (User) genericDaoUser.getById(deleteObjectId);
 
                 // security check to see if the user is deleting their own account or have admin permissions
                 if (loggedUser.get(0).getUserName().equals(currentUser.getUserName()) || loggedUser.get(0).getAdminPermission().equals("true")) {
-                    genericDaoUser.delete(currentUser);
-                    targetURL = getServletContext().getContextPath();
-                    if (loggedUser.get(0).getUserName().equals(currentUser.getUserName())) {
-                        userSession.invalidate();
-                    }
+                    deleteUser = true;
+                    targetURL = getServletContext().getContextPath() + "/";
                 } else {
                     req.setAttribute("errorMessage", "ERROR: not the user or have admin permissions to delete this user");
                 }
@@ -90,6 +90,14 @@ public class Delete extends HttpServlet {
                     targetURL = getServletContext().getContextPath() + "/cards";
                 } else {
                     req.setAttribute("errorMessage", "ERROR: not the card owner or have admin permissions to delete this card");
+                }
+            }
+            // deletes user outside of if statement of user object
+            if (deleteUser) {
+                genericDaoUser.delete(currentUser);
+                // invalidates user session if the user deleted their own account
+                if (loggedUser.get(0).getUserName().equals(currentUser.getUserName())) {
+                    userSession.invalidate();
                 }
             }
         }

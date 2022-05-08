@@ -1,5 +1,5 @@
 <%@ include file="../../taglib.jsp" %>
-<c:if test="${(userName != null) and ((userName == userProfile.userName) or adminPermission == 'true')}">
+<c:if test="${(userName != null) and ((userName == currentCard.user.userName) or adminPermission == 'true')}">
     <tr>
         <div class="card card-body">
             <form class="row form-inline" action="delete" method="POST">

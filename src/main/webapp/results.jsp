@@ -51,6 +51,7 @@
                 </table>
             </c:if>
             <c:if test="${not empty cards}">
+                <h3>Cards</h3>
                 <table class="searchTable display table table-hover">
                     <thead>
                     <tr>
