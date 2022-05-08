@@ -26,61 +26,68 @@ import java.util.List;
 )
 public class Delete extends HttpServlet {
     /**
-     * Handles HTTP GET requests
+     * Handles HTTP DELETE requests
      * @param req servlet request
      * @param resp servlet response
      * @throws ServletException
      * @throws IOException
      */
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession userSession = req.getSession();
         String targetURL = "/error";
         req.setAttribute("errorMessage", "ERROR: user is not logged in. Please sign in to use this feature.");
         if (userSession.getAttribute("userName") != null) {
             String deleteObject = req.getParameter("deleteObject");
-            int deleteValue = Integer.parseInt(req.getParameter("deleteValue"));
+            int deleteObjectId = Integer.parseInt(req.getParameter("deleteObjectId"));
             GenericDao genericDaoUser = new GenericDao(User.class);
             // grabs the logged user
             List<User> loggedUser = genericDaoUser.getByPropertyEqual("userName", (String)userSession.getAttribute("userName"));
-            targetURL = getServletContext().getContextPath();
             if (deleteObject.equals("user")) {
-                User currentUser = (User) genericDaoUser.getById(deleteValue);
+                User currentUser = (User) genericDaoUser.getById(deleteObjectId);
 
                 // security check to see if the user is deleting their own account or have admin permissions
-                if (loggedUser.get(0).getUserName().equals(currentUser.getUserName())) {
+                if (loggedUser.get(0).getUserName().equals(currentUser.getUserName()) || loggedUser.get(0).getAdminPermission().equals("true")) {
                     genericDaoUser.delete(currentUser);
+                    targetURL = getServletContext().getContextPath();
+                    if (loggedUser.get(0).getUserName().equals(currentUser.getUserName())) {
+                        userSession.invalidate();
+                    }
                 } else {
                     req.setAttribute("errorMessage", "ERROR: not the user or have admin permissions to delete this user");
                 }
             }
             if (deleteObject.equals("thread")) {
                 GenericDao genericDaoThread = new GenericDao(Thread.class);
-                Thread currentThread = (Thread) genericDaoThread.getById(deleteValue);
+                Thread currentThread = (Thread) genericDaoThread.getById(deleteObjectId);
                 // security check to see if the user is deleting their own thread or have admin permissions
-                if (loggedUser.get(0).getUserName().equals(currentThread.getUser().getUserName())) {
+                if (loggedUser.get(0).getUserName().equals(currentThread.getUser().getUserName()) || loggedUser.get(0).getAdminPermission().equals("true")) {
                     genericDaoThread.delete(currentThread);
+                    targetURL = getServletContext().getContextPath() + "/threads";
                 } else {
                     req.setAttribute("errorMessage", "ERROR: not the thread owner or have admin permissions to delete this thread");
                 }
             }
             if (deleteObject.equals("reply")) {
                 GenericDao genericDaoReply = new GenericDao(Reply.class);
-                Reply currentReply = (Reply) genericDaoReply.getById(deleteValue);
+                int threadId = Integer.parseInt(req.getParameter("threadId"));
+                Reply currentReply = (Reply) genericDaoReply.getById(deleteObjectId);
 
                 // security check to see if the user is deleting their own reply or have admin permissions
-                if (loggedUser.get(0).getUserName().equals(currentReply.getUser().getUserName())) {
+                if (loggedUser.get(0).getUserName().equals(currentReply.getUser().getUserName()) || loggedUser.get(0).getAdminPermission().equals("true")) {
                     genericDaoReply.delete(currentReply);
+                    targetURL = getServletContext().getContextPath() + "/thread?threadId=" + threadId;
                 } else {
                     req.setAttribute("errorMessage", "ERROR: not the reply owner or have admin permissions to delete this reply");
                 }
             }
             if (deleteObject.equals("card")) {
                 GenericDao genericDaoCard = new GenericDao(Card.class);
-                Card currentCard = (Card) genericDaoCard.getById(deleteValue);
+                Card currentCard = (Card) genericDaoCard.getById(deleteObjectId);
 
-                // security check to see if the user is deleting their own reply or have admin permissions
-                if (loggedUser.get(0).getUserName().equals(currentCard.getUser().getUserName())) {
+                // security check to see if the user is deleting their own card or have admin permissions
+                if (loggedUser.get(0).getUserName().equals(currentCard.getUser().getUserName()) || loggedUser.get(0).getAdminPermission().equals("true")) {
                     genericDaoCard.delete(currentCard);
+                    targetURL = getServletContext().getContextPath() + "/cards";
                 } else {
                     req.setAttribute("errorMessage", "ERROR: not the card owner or have admin permissions to delete this card");
                 }

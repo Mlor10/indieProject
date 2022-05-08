@@ -1,4 +1,4 @@
-package project.controller;
+package project.controller.components.read;
 
 import project.entity.User;
 import project.persistence.GenericDao;
@@ -32,13 +32,13 @@ public class LoadProfile extends HttpServlet {
         String userName = req.getParameter("userName");
         String url;
         List<User> searchUser = genericDaoUser.getByPropertyEqual("userName", userName);
-        // checks the searched username if there are any before inserting into the database
         if (!searchUser.isEmpty()) {
             User userProfile = searchUser.get(0);
             req.setAttribute("userProfile", userProfile);
             url = "userprofile.jsp";
         } else {
             url = "error.jsp";
+            req.setAttribute("errorMessage", "ERROR: could not load the user profile or no user found");
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);

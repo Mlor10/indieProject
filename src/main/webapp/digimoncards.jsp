@@ -17,31 +17,35 @@
     </div>
 
     <div class="row">
-        <h3 class="text-center pt-3">Select an image for your profile</h3>
-        <c:if test="${not empty digimons}">
+        <h3 class="text-center pt-3">Select your card to put up for sale/trade</h3>
+        <c:if test="${not empty digimonCards}">
             <table class="searchTable display table table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">Digimon Images</th>
+                        <th class="text-center">Digimon Cards</th>
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="digimon" items="${digimons}">
+                <c:forEach var="digimonCard" items="${digimonCards}">
                     <tr>
                         <td class=row">
                             <div class="col">
-                                <img src="${digimon.img}" alt="${digimon.name} image" style="height: 160px" class="img-fluid">
+                                <c:if test="${digimonCard.image_url == null}">
+                                    <div class="text-center"><i class="bi bi-question-square"></i></div>
+                                </c:if>
+                                <c:if test="${digimonCard.image_url != null}">
+                                    <img src="${digimonCard.image_url}" alt="${digimonCard.name}-image" style="height: 182px" class="img-fluid">
+                                </c:if>
                             </div>
                             <div class="col">
                                 <div class="row">
-                                    <h3 class="col-3">${digimon.name}</h3>
-                                    <form class="col-3" action="update" method="POST">
-                                        <input type="hidden" name="updateObject" value="user">
-                                        <input type="hidden" name="updateObjectId" value="${updateUser.id}">
-                                        <input type="hidden" name="updateType" value="profileImage">
-                                        <input type="hidden" name="updateValue" value="${digimon.img}">
+                                    <h3 class="col-3">${digimonCard.name}</h3>
+                                    <form class="col-3" action="create" method="POST">
+                                        <input type="hidden" name="createObject" value="card">
+                                        <input type="hidden" name="cardName" value="${digimonCard.name}">
+                                        <input type="hidden" name="cardImage" value="${digimonCard.image_url}">
                                         <div class="col-auto">
-                                            <button type="submit" class="btn btn-primary mb-2">Select Image</button>
+                                            <button type="submit" class="btn btn-primary mb-2">Select Card</button>
                                         </div>
                                     </form>
                                     <div class="col-6"></div>

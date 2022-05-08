@@ -1,4 +1,4 @@
-package project.controller;
+package project.controller.components.read;
 
 import project.persistence.GenericDao;
 import project.entity.Thread;
@@ -36,7 +36,6 @@ public class LoadThread extends HttpServlet {
         currentThread.setThreadViews(currentThread.getThreadViews() + 1);
         genericDaoThread.saveOrUpdate(currentThread);
 
-        // checks the searched thread if there are any before inserting into the database
         if (currentThread != null) {
             req.setAttribute("currentThread", currentThread);
             url = "userthread.jsp";

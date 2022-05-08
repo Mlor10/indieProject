@@ -32,6 +32,7 @@
                 <tr>
                     <c:import url="template/components/userprofile/userprofile-dateofbirth.jsp" />
                 </tr>
+                <c:import url="template/components/userprofile/userprofile-delete.jsp" />
             </table>
         </div>
     </div>

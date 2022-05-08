@@ -1,4 +1,4 @@
-package project.controller;
+package project.controller.components.read;
 
 import project.entity.Card;
 import project.persistence.GenericDao;

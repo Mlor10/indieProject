@@ -1,6 +1,7 @@
 package project.controller.components;
 
 
+import project.entity.Card;
 import project.entity.Reply;
 import project.entity.Thread;
 import project.entity.User;
@@ -42,14 +43,13 @@ public class Create extends HttpServlet {
             int userId = (int)userSession.getAttribute("userId");
             GenericDao genericDaoUser = new GenericDao(User.class);
             GenericDao genericDaoThread = new GenericDao(Thread.class);
+            targetURL = req.getHeader("Referer");
             if (createObject.equals("thread")) {
                 String threadTitle = req.getParameter("threadTitle");
                 String threadContent = req.getParameter("threadContent");
 
                 Thread newThread = new Thread(threadTitle, threadContent, 0, LocalDateTime.now(Clock.systemUTC()).truncatedTo(ChronoUnit.SECONDS), (User)genericDaoUser.getById(userId));
                 genericDaoThread.insert(newThread);
-                Thread retrievedThread = (Thread)genericDaoThread.getById(genericDaoThread.getAllEntities().size());
-                targetURL = getServletContext().getContextPath() + "/thread?threadId=" + retrievedThread.getId();
             }
             if (createObject.equals("reply")) {
                 String replyTitle = req.getParameter("replyTitle");
@@ -59,7 +59,19 @@ public class Create extends HttpServlet {
 
                 Reply newReply = new Reply(replyTitle, replyContent, LocalDateTime.now(Clock.systemUTC()).truncatedTo(ChronoUnit.SECONDS), (Thread)genericDaoThread.getById(threadId), (User)genericDaoUser.getById(userId));
                 genericDaoReply.insert(newReply);
-                targetURL = req.getHeader("Referer");
+            }
+            if (createObject.equals("card")) {
+                String cardName = req.getParameter("cardName");
+                String cardImage = req.getParameter("cardImage");
+                GenericDao genericDaoCard = new GenericDao(Card.class);
+                Card newCard = null;
+                if (!cardImage.equals("") && cardImage != null) {
+                    newCard = new Card(cardName, null, 0, cardImage, (User)genericDaoUser.getById(userId));
+                } else {
+                    newCard = new Card(cardName, null, 0, null, (User)genericDaoUser.getById(userId));
+                }
+                genericDaoCard.insert(newCard);
+                targetURL = getServletContext().getContextPath() + "/cards";
             }
         }
         resp.sendRedirect(targetURL);

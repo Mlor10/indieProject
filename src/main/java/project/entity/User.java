@@ -30,6 +30,8 @@ public class User {
     private LocalDate dateOfBirth;
     @Column(name = "user_image")
     private String userImage;
+    @Column(name = "admin_permission")
+    private String adminPermission;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
@@ -55,13 +57,14 @@ public class User {
      * @param dateOfBirth user date of birth
      * @param userImage user image location/url
      */
-    public User(String firstName, String lastName, String userName, String userEmail, LocalDate dateOfBirth, String userImage) {
+    public User(String firstName, String lastName, String userName, String userEmail, LocalDate dateOfBirth, String userImage, String adminPermission) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.userEmail = userEmail;
         this.dateOfBirth = dateOfBirth;
         this.userImage = userImage;
+        this.adminPermission = adminPermission;
     }
 
     /**
@@ -189,6 +192,24 @@ public class User {
     }
 
     /**
+     * Gets admin permission
+     *
+     * @return the admin permission
+     */
+    public String getAdminPermission() {
+        return adminPermission;
+    }
+
+    /**
+     * Sets admin permission
+     *
+     * @param adminPermission the admin permission
+     */
+    public void setAdminPermission(String adminPermission) {
+        this.adminPermission = adminPermission;
+    }
+
+    /**
      * Gets cards
      *
      * @return the cards
@@ -311,6 +332,11 @@ public class User {
                 ", userEmail='" + userEmail + '\'' +
                 ", id=" + id +
                 ", dateOfBirth=" + dateOfBirth +
+                ", userImage='" + userImage + '\'' +
+                ", adminPermission='" + adminPermission + '\'' +
+                ", cards=" + cards +
+                ", threads=" + threads +
+                ", replies=" + replies +
                 '}';
     }
 
@@ -324,11 +350,13 @@ public class User {
                 && Objects.equals(lastName, user.lastName)
                 && userName.equals(user.userName)
                 && userEmail.equals(user.userEmail)
-                && Objects.equals(dateOfBirth, user.dateOfBirth);
+                && Objects.equals(dateOfBirth, user.dateOfBirth)
+                && Objects.equals(userImage, user.userImage)
+                && Objects.equals(adminPermission, user.adminPermission);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, userName, userEmail, id, dateOfBirth);
+        return Objects.hash(firstName, lastName, userName, userEmail, id, dateOfBirth, userImage, adminPermission);
     }
 }

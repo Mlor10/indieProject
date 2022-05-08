@@ -105,14 +105,16 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             } catch (IOException e) {
                 logger.error("Error getting or validating the token: " + e.getMessage(), e);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("error");
+                req.setAttribute("errorMessage", "ERROR: token retrieval or validation failed.");
                 dispatcher.forward(req, resp);
             } catch (InterruptedException e) {
                 logger.error("Error getting token from Cognito oauth url " + e.getMessage(), e);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("error");
+                req.setAttribute("errorMessage", "ERROR: token retrieval from Cognito oauth url failed.");
                 dispatcher.forward(req, resp);
             }
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("");
         dispatcher.forward(req, resp);
 
     }
@@ -269,9 +271,11 @@ public class Auth extends HttpServlet implements PropertiesLoader {
             insertUserToDatabase(userName, userEmail);
             List<User> newSearchUser = genericDaoUser.getByPropertyEqual("userName", userName);
             userSession.setAttribute("userId", newSearchUser.get(0).getId());
+            userSession.setAttribute("adminPermission", newSearchUser.get(0).getAdminPermission());
         } else {
-            // sets the user's id so the crud process is easier
+            // sets the user's id and admin permission so the crud process is easier
             userSession.setAttribute("userId", searchUser.get(0).getId());
+            userSession.setAttribute("adminPermission", searchUser.get(0).getAdminPermission());
             logger.info(userName + " already exists in the database. Continuing to home page.");
         }
     }
@@ -283,7 +287,7 @@ public class Auth extends HttpServlet implements PropertiesLoader {
      */
     private void insertUserToDatabase(String userName, String userEmail) {
         try {
-            User newUser = new User(null, null, userName, userEmail, null, null);
+            User newUser = new User(null, null, userName, userEmail, null, null, "false");
             genericDaoUser.insert(newUser);
             logger.info(userName + " added to database. Continuing to home page.");
         } catch (Exception e) {

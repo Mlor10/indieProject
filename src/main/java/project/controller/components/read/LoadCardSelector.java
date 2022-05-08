@@ -1,6 +1,6 @@
-package project.controller;
+package project.controller.components.read;
 
-import project.entity.Digimon;
+import project.entity.DigimonCard;
 import project.persistence.GenericDao;
 
 import javax.servlet.RequestDispatcher;
@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Servlet that grabs digimon objects and forwards to the profile images page
+ * Servlet that grabs digimon card objects and forwards to the digimon cards page
  */
 @WebServlet(
-        urlPatterns = {"/profileimages"}
+        urlPatterns = {"/cardselector"}
 )
-public class LoadProfileImage extends HttpServlet {
+public class LoadCardSelector extends HttpServlet {
     /**
      * Handles HTTP GET requests
      * @param req servlet request
@@ -32,18 +32,19 @@ public class LoadProfileImage extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession userSession = req.getSession();
         String url = "error";
+        req.setAttribute("errorMessage", "ERROR: user is not logged in. Please sign in to use this feature.");
         if (userSession.getAttribute("userName") != null) {
             ServletContext servletContext = getServletContext();
-            GenericDao genericDaoResponse = new GenericDao(Digimon.class);
+            GenericDao genericDaoResponse = new GenericDao(DigimonCard.class);
             Properties apiPathProperties = (Properties) servletContext.getAttribute("apiPathProperties");
-            String apiURL = apiPathProperties.getProperty("digimon.image.url.path");
-            String param = "";
+            String apiURL = apiPathProperties.getProperty("digimon.card.url.path");
+            String param = apiPathProperties.getProperty("digimon.card.name.param");
             String paramValue = "";
 
-            List<Digimon> retrievedDigimons = genericDaoResponse.getResponseWithParam(apiURL, param, paramValue);
-            req.setAttribute("digimons", retrievedDigimons);
+            List<DigimonCard> retrievedCards = genericDaoResponse.getResponseWithParam(apiURL, param, paramValue);
+            req.setAttribute("digimonCards", retrievedCards);
 
-            url = "digimonimages.jsp";
+            url = "digimoncards.jsp";
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher(url);
         dispatcher.forward(req, resp);

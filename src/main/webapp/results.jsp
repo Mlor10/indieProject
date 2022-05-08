@@ -1,5 +1,6 @@
 <%@ include file="template/taglib.jsp" %>
 <c:import url="template/head.jsp" />
+<fmt:setLocale value = "en_US"/>
 <script type="text/javascript" class="init">
     $(document).ready( function () {
         $('.searchTable').DataTable();
@@ -50,22 +51,37 @@
                 </table>
             </c:if>
             <c:if test="${not empty cards}">
-                <h3>Cards</h3>
                 <table class="searchTable display table table-hover">
                     <thead>
-                        <tr>
-                            <th>Card Name</th>
-                            <th>Card Description</th>
-                            <th>Card Price</th>
-                            <th>Card's User</th>
-                        </tr>
+                    <tr>
+                        <th>Card Name</th>
+                        <th>Card Description</th>
+                        <th>Card Price</th>
+                        <th>Card's User</th>
+                    </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="card" items="${cards}">
                         <tr>
-                            <td>${card.cardName}</td>
+                            <td>
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <c:if test="${empty card.cardImage}">
+                                                <a class="text-decoration-none" href="card?cardId=${card.id}"><i class="bi bi-question-square"></i></a>
+                                            </c:if>
+                                            <c:if test="${not empty card.cardImage}">
+                                                <a class="text-decoration-none" href="card?cardId=${card.id}"><img src="${card.cardImage}" alt="${card.cardName}-card-image"></a>
+                                            </c:if>
+                                        </div>
+                                        <div class="row text-center mt-1 fs-5">
+                                            <a class="text-decoration-none" href="card?cardId=${card.id}">${card.cardName}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td>${card.cardDescription}</td>
-                            <td>${card.cardPrice}</td>
+                            <td><fmt:formatNumber type="currency" value="${card.cardPrice}" /></td>
                             <td><a class="text-decoration-none" href="profile?userName=${card.user.userName}">${card.user.userName}</a></td>
                         </tr>
                     </c:forEach>
@@ -87,7 +103,9 @@
                     <tbody>
                     <c:forEach var="thread" items="${threads}">
                         <tr>
-                            <td>${thread.threadTitle}</td>
+                            <td>
+                                <a class="text-decoration-none" href="thread?threadId=${thread.id}">${thread.threadTitle}</a>
+                            </td>
                             <td>${thread.replies.size()}</td>
                             <td>${thread.threadViews}</td>
                             <td>

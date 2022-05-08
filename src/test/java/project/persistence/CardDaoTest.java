@@ -41,7 +41,7 @@ class CardDaoTest {
     void getByPropertyLikeSuccess() {
         List<Card> expectedCards = genericDaoCard.getAllEntities();
         List<Card> actualCards = genericDaoCard.getByPropertyLike("cardName","Omnimon");
-        assertEquals(1, actualCards.size());
+        assertEquals(5, actualCards.size());
         assertNotEquals(expectedCards, actualCards);
     }
 
@@ -52,7 +52,7 @@ class CardDaoTest {
     void getByPropertyEqualSuccess() {
         List<Card> expectedCards = genericDaoCard.getAllEntities();
         List<Card> actualCards = genericDaoCard.getByPropertyEqual("cardName","Omnimon");
-        assertEquals(1, actualCards.size());
+        assertEquals(2, actualCards.size());
         assertNotEquals(expectedCards, actualCards);
     }
 
@@ -103,7 +103,7 @@ class CardDaoTest {
         List<Card> cardsAfter;
         List<User> retrievedUsers = genericDaoUser.getAllEntities();
         User retrievedUser = retrievedUsers.get(5);
-        Card cardToInsert = new Card("Beelzemon", "example description", 7.99, retrievedUser);
+        Card cardToInsert = new Card("Beelzemon", "example description", 7.99, null, retrievedUser);
 
         genericDaoCard.insert(cardToInsert);
         cardsAfter = genericDaoCard.getAllEntities();

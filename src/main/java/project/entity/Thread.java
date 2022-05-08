@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -122,7 +123,7 @@ public class Thread {
      * @param threadDate thread date
      */
     public void setThreadDate(LocalDateTime threadDate) {
-        this.threadDate = formatDateTime(threadDate);
+        this.threadDate = formatDateTime(formatToCST(threadDate));
     }
 
     /**
@@ -200,6 +201,16 @@ public class Thread {
     }
 
     /**
+     * Formats the localdatetime to CST timezone
+     * @param threadDate thread date
+     * @return thread date in CST timezone
+     */
+    public LocalDateTime formatToCST(LocalDateTime threadDate) {
+        ZoneId timeZone = ZoneId.of("America/Chicago");
+        return threadDate.atZone(timeZone).toLocalDateTime();
+    }
+
+    /**
      * Formats the localdatetime by removing anything less than seconds such as milliseconds
      * @param threadDate thread date to format
      * @return formatted thread date
@@ -236,7 +247,12 @@ public class Thread {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Thread thread = (Thread) o;
-        return threadViews == thread.threadViews && id == thread.id && threadTitle.equals(thread.threadTitle) && threadContent.equals(thread.threadContent) && threadDate.equals(thread.threadDate) && user.equals(thread.user);
+        return threadViews == thread.threadViews
+                && id == thread.id
+                && threadTitle.equals(thread.threadTitle)
+                && threadContent.equals(thread.threadContent)
+                && threadDate.equals(thread.threadDate)
+                && user.equals(thread.user);
     }
 
     @Override

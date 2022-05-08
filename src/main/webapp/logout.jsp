@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <c:if test="${userName == null}">
-            <h2 class="text-center">You have logged out successfully</h2>
+            <h2 class="text-center mt-3">You have logged out successfully</h2>
         </c:if>
     </div>
 </div>

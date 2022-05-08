@@ -17,6 +17,8 @@ public class Card {
     private String cardDescription;
     @Column(name = "price")
     private double cardPrice;
+    @Column(name = "card_image")
+    private String cardImage;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
     @GenericGenerator(name = "native",strategy = "native")
@@ -38,10 +40,11 @@ public class Card {
      * @param cardPrice card price
      * @param user card's user
      */
-    public Card(String cardName, String cardDescription, double cardPrice, User user) {
+    public Card(String cardName, String cardDescription, double cardPrice, String cardImage, User user) {
         this.cardName = cardName;
         this.cardDescription = cardDescription;
         this.cardPrice = cardPrice;
+        this.cardImage = cardImage;
         this.user = user;
     }
 
@@ -99,6 +102,25 @@ public class Card {
         this.cardPrice = cardPrice;
     }
 
+
+    /**
+     * Gets card image.
+     *
+     * @return the card image
+     */
+    public String getCardImage() {
+        return cardImage;
+    }
+
+    /**
+     * Sets card image.
+     *
+     * @param cardImage the card image
+     */
+    public void setCardImage(String cardImage) {
+        this.cardImage = cardImage;
+    }
+
     /**
      * Gets id.
      *
@@ -141,9 +163,10 @@ public class Card {
                 "cardName='" + cardName + '\'' +
                 ", cardDescription='" + cardDescription + '\'' +
                 ", cardPrice=" + cardPrice +
+                ", cardImage='" + cardImage + '\'' +
                 ", id=" + id +
-                ", userId= " + user.getId() +
-                "}";
+                ", user=" + user +
+                '}';
     }
 
     @Override
@@ -151,14 +174,11 @@ public class Card {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
-        return Double.compare(card.cardPrice, cardPrice) == 0
-                && id == card.id && cardName.equals(card.cardName)
-                && Objects.equals(cardDescription, card.cardDescription)
-                && user.equals(card.user);
+        return Double.compare(card.cardPrice, cardPrice) == 0 && id == card.id && cardName.equals(card.cardName) && Objects.equals(cardDescription, card.cardDescription) && Objects.equals(cardImage, card.cardImage) && user.equals(card.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cardName, cardDescription, cardPrice, id, user);
+        return Objects.hash(cardName, cardDescription, cardPrice, cardImage, id, user);
     }
 }

@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
@@ -103,7 +104,7 @@ public class Reply implements Comparable<Reply>{
      * @param replyDate the reply date
      */
     public void setReplyDate(LocalDateTime replyDate) {
-        this.replyDate = formatDateTime(replyDate);
+        this.replyDate = formatDateTime(formatToCST(replyDate));
     }
 
     /**
@@ -158,6 +159,16 @@ public class Reply implements Comparable<Reply>{
      */
     public void setUser(User user) {
         this.user = user;
+    }
+
+    /**
+     * Formats the localdatetime to CST timezone
+     * @param replyDate reply date
+     * @return reply date in CST timezone
+     */
+    public LocalDateTime formatToCST(LocalDateTime replyDate) {
+        ZoneId timeZone = ZoneId.of("America/Chicago");
+        return replyDate.atZone(timeZone).toLocalDateTime();
     }
 
     /**
