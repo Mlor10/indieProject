@@ -34,6 +34,8 @@ from the trading card game industry.
 * [Screen Design](DesignDocuments/Screens.md)
 * [DB Diagram](DesignDocuments/db-diagram.png)
 
+### [Deployed AWS Web App](http://indieproject-env.eba-iu4yftnp.us-east-2.elasticbeanstalk.com/)
+
 ### [WebApp Demo Video](https://youtu.be/172AsSLmSl4)
 
 ### [Project Plan](DesignDocuments/ProjectPlan.md)
